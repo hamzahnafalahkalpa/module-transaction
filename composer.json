@@ -1,0 +1,29 @@
+{
+    "name": "zahzah/module-transaction",
+    "autoload": {
+        "psr-4": {
+            "Zahzah\\ModuleTransaction\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hamzah",
+            "email": "hamzahnuralfalah@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zahzah\\ModuleTransaction\\ModuleTransactionServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "gii/module-item": "2.x",
+        "gii/module-service": "2.x",
+        "zahzah/laravel-has-props": "2.x",
+        "zahzah/laravel-support": "2.x"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false
+}

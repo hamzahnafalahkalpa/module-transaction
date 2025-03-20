@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\RefundItem;
+namespace Hanafalah\ModuleTransaction\Resources\RefundItem;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ShowRefundItem extends ViewRefundItem
 {
@@ -15,11 +15,10 @@ class ShowRefundItem extends ViewRefundItem
      */
     public function toArray(\Illuminate\Http\Request $request): array
     {
-        $arr = [
-        ];
+        $arr = [];
 
-        $arr = array_merge(parent::toArray($request),$arr);
-        
+        $arr = array_merge(parent::toArray($request), $arr);
+
         return $arr;
     }
 }

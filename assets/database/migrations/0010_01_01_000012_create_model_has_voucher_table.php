@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   use Zahzah\LaravelSupport\Concerns\NowYouSeeMe;
+    use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
     private $__table;
 
-    public function __construct(){
-        $this->__table = app(config('database.models.ModelHasVoucher', \Zahzah\ModuleTransaction\Models\Price\ModelHasVoucher::class));
+    public function __construct()
+    {
+        $this->__table = app(config('database.models.ModelHasVoucher', \Hanafalah\ModuleTransaction\Models\Price\ModelHasVoucher::class));
     }
 
     /**
@@ -22,7 +23,7 @@ return new class extends Migration
     public function up(): void
     {
         $table_name = $this->__table->getTable();
-        if (!$this->isTableExists()){
+        if (!$this->isTableExists()) {
             Schema::create($table_name, function (Blueprint $table) {
                 $voucher = app(config('database.models.Voucher', \Projects\Klinik\Models\Transaction\Voucher::class));
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\ComponentDetail;
+namespace Hanafalah\ModuleTransaction\Resources\ComponentDetail;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewComponentDetail extends ApiResource
 {
@@ -21,7 +21,7 @@ class ViewComponentDetail extends ApiResource
         if (isset($this->jurnal)) {
             $arr['jurnal'] = $this->jurnal;
         }
-        
+
         return $arr;
     }
 }

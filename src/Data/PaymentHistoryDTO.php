@@ -1,10 +1,11 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Data;
+namespace Hanafalah\ModuleTransaction\Data;
 
-use Zahzah\LaravelSupport\Supports\Data;
+use Hanafalah\LaravelSupport\Supports\Data;
 
-class PaymentHistoryDTO extends Data{
+class PaymentHistoryDTO extends Data
+{
     public function __construct(
         public mixed $id,
         public mixed $parent_id,
@@ -18,5 +19,5 @@ class PaymentHistoryDTO extends Data{
         public int $total_tax = 0,
         public int $total_additional = 0,
         ...$args
-    ){}
+    ) {}
 }

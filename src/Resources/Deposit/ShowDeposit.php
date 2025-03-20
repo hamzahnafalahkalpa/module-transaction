@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Deposit;
+namespace Hanafalah\ModuleTransaction\Resources\Deposit;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ShowDeposit extends ViewDeposit
 {
@@ -16,11 +16,11 @@ class ShowDeposit extends ViewDeposit
     public function toArray(\Illuminate\Http\Request $request): array
     {
         $arr = [
-            'reference' => $this->relationValidation('reference',function(){
+            'reference' => $this->relationValidation('reference', function () {
                 return $this->reference->toShowApi();
             })
         ];
-        
+
         return $arr;
     }
 }

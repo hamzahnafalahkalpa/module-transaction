@@ -1,6 +1,6 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\VoucherRule;
+namespace Hanafalah\ModuleTransaction\Resources\VoucherRule;
 
 class ShowVoucherRule extends ViewVoucherRule
 {
@@ -14,12 +14,12 @@ class ShowVoucherRule extends ViewVoucherRule
     public function toArray(\Illuminate\Http\Request $request): array
     {
         $arr = [
-            'voucher'             => $this->relationValidation('voucher', function() {
+            'voucher'             => $this->relationValidation('voucher', function () {
                 return $this->voucher->toShowApi();
             })
         ];
-        $arr = $this->mergeArray(parent::toArray($request),$arr);
-        
+        $arr = $this->mergeArray(parent::toArray($request), $arr);
+
         return $arr;
     }
 }

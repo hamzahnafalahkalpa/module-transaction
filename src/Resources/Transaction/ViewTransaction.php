@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Transaction;
+namespace Hanafalah\ModuleTransaction\Resources\Transaction;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewTransaction extends ApiResource
 {
@@ -44,7 +44,7 @@ class ViewTransaction extends ApiResource
         foreach ($props as $key => $prop) {
             $arr[$key] = $prop;
         }
-        
+
         return $arr;
     }
 }

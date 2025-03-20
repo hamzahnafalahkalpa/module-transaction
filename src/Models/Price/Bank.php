@@ -1,13 +1,14 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Models\Price;
+namespace Hanafalah\ModuleTransaction\Models\Price;
 
-use Zahzah\LaravelSupport\Models\BaseModel;
-use Zahzah\ModuleTransaction\Enums\Bank\Status;
-use Zahzah\ModuleTransaction\Resources\Bank\{ViewBank, ShowBank};
+use Hanafalah\LaravelSupport\Models\BaseModel;
+use Hanafalah\ModuleTransaction\Enums\Bank\Status;
+use Hanafalah\ModuleTransaction\Resources\Bank\{ViewBank, ShowBank};
 
-class Bank extends BaseModel{
-    protected $list = ['id','name','account_number','account_name','status'];
+class Bank extends BaseModel
+{
+    protected $list = ['id', 'name', 'account_number', 'account_name', 'status'];
 
     protected $casts = [
         'name'            => 'string',
@@ -15,21 +16,24 @@ class Bank extends BaseModel{
         'account_number'  => 'string'
     ];
 
-    protected static function booted(): void{
+    protected static function booted(): void
+    {
         parent::booted();
-        static::addGlobalScope('bank-status',function($query){
-            $query->where('status',Status::ACTIVE->value);
+        static::addGlobalScope('bank-status', function ($query) {
+            $query->where('status', Status::ACTIVE->value);
         });
-        static::creating(function($query){
+        static::creating(function ($query) {
             if (!isset($query->status)) $query->status = Status::ACTIVE->value;
         });
     }
 
-    public function toViewApi(){
+    public function toViewApi()
+    {
         return new ViewBank($this);
     }
 
-    public function toShowApi(){
+    public function toShowApi()
+    {
         return new ShowBank($this);
     }
 }

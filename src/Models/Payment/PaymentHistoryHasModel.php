@@ -1,11 +1,12 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Models\Payment;
+namespace Hanafalah\ModuleTransaction\Models\Payment;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Zahzah\LaravelSupport\Models\BaseModel;
+use Hanafalah\LaravelSupport\Models\BaseModel;
 
-class PaymentHistoryHasModel extends BaseModel{
+class PaymentHistoryHasModel extends BaseModel
+{
     use HasUlids;
 
     public $incrementing   = false;
@@ -13,10 +14,22 @@ class PaymentHistoryHasModel extends BaseModel{
     protected $primaryKey  = 'id';
 
     protected $list        = [
-        'id','payment_history_id','model_type','model_id'
+        'id',
+        'payment_history_id',
+        'model_type',
+        'model_id'
     ];
 
-    public function paymentHistory(){return $this->belongsToModel('PaymentHistory');}
-    public function model(){return $this->morphTo();}
-    public function paymentSummary(){return $this->morphOneModel('PaymentSummary','reference');}
+    public function paymentHistory()
+    {
+        return $this->belongsToModel('PaymentHistory');
+    }
+    public function model()
+    {
+        return $this->morphTo();
+    }
+    public function paymentSummary()
+    {
+        return $this->morphOneModel('PaymentSummary', 'reference');
+    }
 }

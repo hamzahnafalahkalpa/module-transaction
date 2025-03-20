@@ -4,18 +4,19 @@ use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Zahzah\ModuleTransaction\{
+use Hanafalah\ModuleTransaction\{
     Models\Payment\PaymentHistoryHasModel,
 };
-use Zahzah\ModuleTransaction\Models\Payment\PaymentHistory;
+use Hanafalah\ModuleTransaction\Models\Payment\PaymentHistory;
 
 return new class extends Migration
 {
-   use Zahzah\LaravelSupport\Concerns\NowYouSeeMe;
+    use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
     private $__table;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->__table = app(config('database.models.PaymentHistoryHasModel', PaymentHistoryHasModel::class));
     }
 
@@ -27,19 +28,19 @@ return new class extends Migration
     public function up(): void
     {
         $table_name = $this->__table->getTable();
-        if (!$this->isTableExists()){
+        if (!$this->isTableExists()) {
             Schema::create($table_name, function (Blueprint $table) {
-                $payment_history = app(config('database.models.PaymentHistory',PaymentHistory::class));
+                $payment_history = app(config('database.models.PaymentHistory', PaymentHistory::class));
 
                 $table->ulid('id')->primary();
-                $table->foreignIdFor($payment_history::class,'payment_history_id')
-                      ->index('ph_phhm')->constrained()
-                      ->cascadeOnUpdate()->restrictOnDelete();
-                $table->string('model_type',50)->nullable(false);
-                $table->string('model_id',36)->nullable(false);
+                $table->foreignIdFor($payment_history::class, 'payment_history_id')
+                    ->index('ph_phhm')->constrained()
+                    ->cascadeOnUpdate()->restrictOnDelete();
+                $table->string('model_type', 50)->nullable(false);
+                $table->string('model_id', 36)->nullable(false);
                 $table->timestamps();
 
-                $table->index(['model_type','model_id'],'model_phhm');
+                $table->index(['model_type', 'model_id'], 'model_phhm');
             });
         }
     }

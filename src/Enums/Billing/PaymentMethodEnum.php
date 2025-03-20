@@ -1,7 +1,7 @@
 
     <?php
 
-    namespace Zahzah\ModuleTransaction\Enums\Billing;
+    namespace Hanafalah\ModuleTransaction\Enums\Billing;
 
     enum PaymentMethodEnum: string
     {

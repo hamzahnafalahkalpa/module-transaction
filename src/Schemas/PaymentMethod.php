@@ -1,13 +1,13 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Schemas;
+namespace Hanafalah\ModuleTransaction\Schemas;
 
-use Zahzah\LaravelSupport\Supports\PackageManagement;
-use Zahzah\ModuleTransaction\Contracts\PaymentMethod as ContractsPaymentMethod;
+use Hanafalah\LaravelSupport\Supports\PackageManagement;
+use Hanafalah\ModuleTransaction\Contracts\PaymentMethod as ContractsPaymentMethod;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Zahzah\ModuleTransaction\Resources\PaymentMethod\{
+use Hanafalah\ModuleTransaction\Resources\PaymentMethod\{
     ShowPaymentMethod,
     ViewPaymentMethod
 };
@@ -49,8 +49,8 @@ class PaymentMethod extends PackageManagement implements ContractsPaymentMethod
     // }
 
     public function viewPaymentMethodList(mixed $flags = null): array
-        {
-        return $this->transforming($this->__resources['view'], function() use ($flags) {
+    {
+        return $this->transforming($this->__resources['view'], function () use ($flags) {
             return $this->prepareViewPaymentMethodList($flags);
         });
     }

@@ -1,21 +1,23 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Schemas;
+namespace Hanafalah\ModuleTransaction\Schemas;
 
-use Zahzah\LaravelSupport\Supports\PackageManagement;
-use Zahzah\ModuleTransaction\Contracts\Deposit as ContractsDeposit;
+use Hanafalah\LaravelSupport\Supports\PackageManagement;
+use Hanafalah\ModuleTransaction\Contracts\Deposit as ContractsDeposit;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
-class Deposit extends PackageManagement implements ContractsDeposit{
-    
-    public function booting(): self{
+class Deposit extends PackageManagement implements ContractsDeposit
+{
+
+    public function booting(): self
+    {
         static::$__class = $this;
-        static::$__model = $this->{$this->__entity."Model"}();
+        static::$__model = $this->{$this->__entity . "Model"}();
         return $this;
     }
 
-    protected array $__guard   = ['id', 'reference_type', 'reference_id']; 
+    protected array $__guard   = ['id', 'reference_type', 'reference_id'];
     protected array $__add     = ['total', 'reported_at'];
     protected string $__entity = 'Deposit';
 
@@ -28,18 +30,20 @@ class Deposit extends PackageManagement implements ContractsDeposit{
      *
      * @return \Illuminate\Database\Eloquent\Model The API access model.
      */
-    public function addOrChange(? array $attributes=[]): self{    
-        $this->updateOrCreate($attributes);   
+    public function addOrChange(?array $attributes = []): self
+    {
+        $this->updateOrCreate($attributes);
         return $this;
     }
 
     //GETTER SECTION
-    protected function deposit(mixed $conditionals = null): Builder{
+    protected function deposit(mixed $conditionals = null): Builder
+    {
         return $this->DepositModel()->conditionals($conditionals);
     }
 
-    public function get(mixed $conditionals = null): Collection{
+    public function get(mixed $conditionals = null): Collection
+    {
         return $this->deposit($conditionals)->get();
     }
-
 }

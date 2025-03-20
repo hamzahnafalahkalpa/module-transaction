@@ -1,22 +1,23 @@
 <?php
 
 use App\Models\User;
-use Gii\ModuleService\Models\Service;
+use Hanafalah\ModuleService\Models\Service;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Projects\Klinik\Models\TariffComponent\TariffComponent;
-use Zahzah\ModuleTransaction\{
+use Hanafalah\ModuleTransaction\{
     Models\Price\PriceComponent,
 };
 
 return new class extends Migration
 {
-   use Zahzah\LaravelSupport\Concerns\NowYouSeeMe;
+    use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
     private $__table;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->__table = app(config('database.models.PriceComponent', PriceComponent::class));
     }
 
@@ -28,25 +29,25 @@ return new class extends Migration
     public function up(): void
     {
         $table_name = $this->__table->getTable();
-        if (!$this->isTableExists()){
+        if (!$this->isTableExists()) {
             Schema::create($table_name, function (Blueprint $table) {
                 $tariffComponent = app(config('database.models.TariffComponent', TariffComponent::class));
-                $service = app(config('database.models.Service',Service::class));
+                $service = app(config('database.models.Service', Service::class));
 
                 $table->id();
                 $table->foreignIdFor($service::class)->nullable(true)
-                      ->index()->constrained()->restrictOnDelete()->cascadeOnUpdate();
+                    ->index()->constrained()->restrictOnDelete()->cascadeOnUpdate();
 
-                $table->string('model_type',50)->nullable(false);
-                $table->string('model_id',36)->nullable(false);
+                $table->string('model_type', 50)->nullable(false);
+                $table->string('model_id', 36)->nullable(false);
 
                 $table->foreignIdFor($tariffComponent::class)->nullable(false)
-                      ->index()->constrained()->cascadeOnUpdate()->restrictOnDelete();
+                    ->index()->constrained()->cascadeOnUpdate()->restrictOnDelete();
                 $table->unsignedBigInteger('price')->nullable(false)->default(0);
                 $table->timestamps();
                 $table->softDeletes();
 
-                $table->index(['model_type','model_id'],'pc_model');
+                $table->index(['model_type', 'model_id'], 'pc_model');
             });
         }
     }

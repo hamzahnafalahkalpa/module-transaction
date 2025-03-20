@@ -1,9 +1,11 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Concerns;
+namespace Hanafalah\ModuleTransaction\Concerns;
 
-trait HasTransactionItem{
-    public function transactionItem(){
-        return $this->morphOneModel('Transaction','item');
+trait HasTransactionItem
+{
+    public function transactionItem()
+    {
+        return $this->morphOneModel('Transaction', 'item');
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Concerns;
+namespace Hanafalah\ModuleTransaction\Concerns;
 
-trait HasInvoice{
-    public function invoice(){
+trait HasInvoice
+{
+    public function invoice()
+    {
         return $this->belongsToModel('Invoice');
     }
 }

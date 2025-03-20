@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   use Zahzah\LaravelSupport\Concerns\NowYouSeeMe;
+    use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
     private $__table;
 
-    public function __construct(){
-        $this->__table = app(config('database.models.Voucher', \Zahzah\ModuleTransaction\Models\Price\Voucher::class));
+    public function __construct()
+    {
+        $this->__table = app(config('database.models.Voucher', \Hanafalah\ModuleTransaction\Models\Price\Voucher::class));
     }
 
     /**
@@ -22,18 +23,18 @@ return new class extends Migration
     public function up(): void
     {
         $table_name = $this->__table->getTable();
-        if (!$this->isTableExists()){
+        if (!$this->isTableExists()) {
             Schema::create($table_name, function (Blueprint $table) {
                 $table->ulid('id')->primary();
                 $table->string('name');
-                $table->string('status',100);
+                $table->string('status', 100);
                 $table->string('benefit_target');
-                $table->enum('benefit_format',[
+                $table->enum('benefit_format', [
                     $this->__table::BENEFIT_FORMAT_PERCENTAGE,
                     $this->__table::BENEFIT_FORMAT_AMOUNT
                 ]);
                 $table->unsignedBigInteger('benefit_value');
-                $table->enum('benefit_type_value',[
+                $table->enum('benefit_type_value', [
                     $this->__table::BENEFIT_TYPE_MARKDOWN,
                     $this->__table::BENEFIT_TYPE_MARKUP,
                     $this->__table::BENEFIT_TYPE_DISCOUNT,

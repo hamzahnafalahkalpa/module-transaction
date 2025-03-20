@@ -1,17 +1,19 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Models\Payment;
+namespace Hanafalah\ModuleTransaction\Models\Payment;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Zahzah\LaravelHasProps\Concerns\HasProps;
-use Zahzah\LaravelSupport\Models\BaseModel;
-use Zahzah\ModuleTransaction\Concerns\HasInvoice;
-use Zahzah\ModuleTransaction\Resources\PaymentMethod\{
-    ShowPaymentMethod, ViewPaymentMethod
+use Hanafalah\LaravelHasProps\Concerns\HasProps;
+use Hanafalah\LaravelSupport\Models\BaseModel;
+use Hanafalah\ModuleTransaction\Concerns\HasInvoice;
+use Hanafalah\ModuleTransaction\Resources\PaymentMethod\{
+    ShowPaymentMethod,
+    ViewPaymentMethod
 };
 
-class PaymentMethod extends BaseModel{
+class PaymentMethod extends BaseModel
+{
     use HasUlids, HasProps, SoftDeletes;
 
     const PAYMENT_METHOD_DEFERRED = "DEFERRED";
@@ -19,18 +21,20 @@ class PaymentMethod extends BaseModel{
     public $incrementing  = false;
     protected $keyType    = "string";
     protected $primaryKey = 'id';
-    protected $list       = ['id','name','props'];
+    protected $list       = ['id', 'name', 'props'];
 
-    protected static function booted(): void{
+    protected static function booted(): void
+    {
         parent::booted();
     }
 
-    public function toShowApi(){
+    public function toShowApi()
+    {
         return new ShowPaymentMethod($this);
     }
 
-    public function toViewApi(){
+    public function toViewApi()
+    {
         return new ViewPaymentMethod($this);
     }
-
 }

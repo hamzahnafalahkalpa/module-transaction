@@ -1,16 +1,18 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Schemas;
+namespace Hanafalah\ModuleTransaction\Schemas;
 
-use Zahzah\LaravelSupport\Supports\PackageManagement;
-use Zahzah\ModuleTransaction\Contracts\PriceComponent as ContractsPriceComponent;
-use Zahzah\ModuleTransaction\Resources\PriceComponent\{
-    ViewPriceComponent, ShowPriceComponent
+use Hanafalah\LaravelSupport\Supports\PackageManagement;
+use Hanafalah\ModuleTransaction\Contracts\PriceComponent as ContractsPriceComponent;
+use Hanafalah\ModuleTransaction\Resources\PriceComponent\{
+    ViewPriceComponent,
+    ShowPriceComponent
 };
 
-class PriceComponent extends PackageManagement implements ContractsPriceComponent{
-    protected array $__guard   = ['id','model_type','model_id'];
-    protected array $__add     = ['tariff_component_id','price'];
+class PriceComponent extends PackageManagement implements ContractsPriceComponent
+{
+    protected array $__guard   = ['id', 'model_type', 'model_id'];
+    protected array $__add     = ['tariff_component_id', 'price'];
     protected string $__entity = 'PriceComponent';
     public static $price_component;
     public static $price = 0;
@@ -20,32 +22,33 @@ class PriceComponent extends PackageManagement implements ContractsPriceComponen
         'show' => ShowPriceComponent::class
     ];
 
-    public function prepareStorePriceComponent(mixed $attributes=null){
+    public function prepareStorePriceComponent(mixed $attributes = null)
+    {
         $attributes ??= request()->all();
 
         //GET EXISTING TARIFF COMPONENTS
         $model = $this->pricecomponent()->where([
             ['model_id', $attributes['model_id']],
             ['model_type', $attributes['model_type']]
-        ])->when(isset($attributes['service_id']),function($query) use ($attributes){
-            $query->where('service_id',$attributes['service_id']);
+        ])->when(isset($attributes['service_id']), function ($query) use ($attributes) {
+            $query->where('service_id', $attributes['service_id']);
         });
 
         $tariffComponents = $model->get();
-        $tariff_component_ids = array_column($tariffComponents->toArray(),'id');
-        if (isset($attributes['tariff_components'])){
+        $tariff_component_ids = array_column($tariffComponents->toArray(), 'id');
+        if (isset($attributes['tariff_components'])) {
             $keep  = [];
             $price = 0;
             $service = [];
-            if (isset($attributes['service_id'])){
+            if (isset($attributes['service_id'])) {
                 $service['service_id'] = $attributes['service_id'];
             }
             foreach ($attributes['tariff_components'] as $tariff) {
-                $tariff = $this->pricecomponent()->updateOrCreate($this->mergeArray($service,[
+                $tariff = $this->pricecomponent()->updateOrCreate($this->mergeArray($service, [
                     'model_id'   => $attributes['model_id'],
                     'model_type' => $attributes['model_type'],
                     $this->TariffComponentModel()->getForeignKey() => $tariff['id']
-                ]),[
+                ]), [
                     'price' => $tariff['price']
                 ]);
                 $keep[] = $tariff->getKey();
@@ -53,22 +56,24 @@ class PriceComponent extends PackageManagement implements ContractsPriceComponen
             }
             static::$price = $price;
             $remove = array_diff($tariff_component_ids, $keep);
-            if (isset($attributes['service'])){
+            if (isset($attributes['service'])) {
                 $attributes['service']->price = $price;
                 $attributes['service']->save();
             }
             if (count($remove) > 0) $this->pricecomponent()->whereIn('id', $remove)->delete();
-        }else{
+        } else {
             $model->delete();
         }
     }
 
-    public function getPrice(): int{
+    public function getPrice(): int
+    {
         return static::$price;
     }
 
-    public function addOrChange(? array $attributes=[]): self{
-        if(isset($attributes['parent_model'])) {
+    public function addOrChange(?array $attributes = []): self
+    {
+        if (isset($attributes['parent_model'])) {
             $attributes['parent_model']->load("treatment");
             $service = $attributes['parent_model']->treatment;
             $service->price = $attributes['price'];
@@ -81,8 +86,8 @@ class PriceComponent extends PackageManagement implements ContractsPriceComponen
                 "price"               => $attributes['price']
             ];
         } else {
-            if(!isset($attributes['id'])) throw new \Exception("id required");
-            if(!isset($attributes['id'])) throw new \Exception("price required");
+            if (!isset($attributes['id'])) throw new \Exception("id required");
+            if (!isset($attributes['id'])) throw new \Exception("price required");
 
             $attributes = [
                 "model_id"            => $attributes['parent_model']->id,
@@ -96,7 +101,7 @@ class PriceComponent extends PackageManagement implements ContractsPriceComponen
             'model_id'            => $attributes['model_id'],
             'model_type'          => $attributes['model_type'],
             'tariff_component_id' => $attributes['tariff_component_id'],
-        ],[
+        ], [
             'service_id'          => isset($attributes['service_id']) ? $attributes['service_id'] : null,
             'price'               => $attributes['price']
         ]);
@@ -104,11 +109,13 @@ class PriceComponent extends PackageManagement implements ContractsPriceComponen
         return $this;
     }
 
-    public function getPriceComponent(): mixed{
+    public function getPriceComponent(): mixed
+    {
         return static::$price_component;
     }
 
-    public function pricecomponent(mixed $conditionals=null){
+    public function pricecomponent(mixed $conditionals = null)
+    {
         $this->booting();
         return $this->PriceComponentModel()->withParameters()->conditionals($conditionals);
     }

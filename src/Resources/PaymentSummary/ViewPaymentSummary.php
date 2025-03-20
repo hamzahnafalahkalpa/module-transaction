@@ -1,10 +1,10 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\PaymentSummary;
+namespace Hanafalah\ModuleTransaction\Resources\PaymentSummary;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
-use Zahzah\ModuleTransaction\Models\Transaction\SplitBill;
-use Zahzah\ModuleTransaction\Resources\PaymentDetail\ViewPaymentDetail;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\ModuleTransaction\Models\Transaction\SplitBill;
+use Hanafalah\ModuleTransaction\Resources\PaymentDetail\ViewPaymentDetail;
 
 class ViewPaymentSummary extends ApiResource
 {
@@ -30,36 +30,36 @@ class ViewPaymentSummary extends ApiResource
             'reference'        => $this->relationValidation('reference', function () {
                 return $this->reference->toViewApi();
             }),
-            'payment_details'  => $this->relationValidation('paymentDetails',function(){
+            'payment_details'  => $this->relationValidation('paymentDetails', function () {
                 $paymentDetails = $this->paymentDetails;
-                return $paymentDetails->transform(function($paymentDetail){
+                return $paymentDetails->transform(function ($paymentDetail) {
                     return $paymentDetail->toViewApi();
                 });
             }),
-            'transaction'      => $this->relationValidation('transaction',function(){
+            'transaction'      => $this->relationValidation('transaction', function () {
                 $transaction = $this->transaction;
                 return $transaction->toViewApi();
             }),
-            'patient'      => $this->relationValidation('patient',function(){
-                 $patient = $this->patient;
-                 return $patient->toViewApi();
+            'patient'      => $this->relationValidation('patient', function () {
+                $patient = $this->patient;
+                return $patient->toViewApi();
             }),
             'created_at'       => $this->created_at,
             'updated_at'       => $this->updated_at,
-            'childs'           => $this->relationValidation('childs',function(){
+            'childs'           => $this->relationValidation('childs', function () {
                 $childs = $this->childs;
-                return $childs->transform(function($child){
+                return $childs->transform(function ($child) {
                     return $child->toViewApi();
                 });
             }),
-            'payment_summaries' => $this->relationValidation('paymentSummaries',function(){
-                return $this->paymentSummaries->transform(function($paymentSummary){
+            'payment_summaries' => $this->relationValidation('paymentSummaries', function () {
+                return $this->paymentSummaries->transform(function ($paymentSummary) {
                     return $paymentSummary->toViewApi();
                 });
             })
         ];
-        if (isset($this->pre_total_debt)){
-            $arr = $this->mergeArray($arr,[
+        if (isset($this->pre_total_debt)) {
+            $arr = $this->mergeArray($arr, [
                 "pre_total_debt"       => $this->pre_total_debt,
                 "pre_total_additional" => $this->pre_total_additional,
                 "pre_total_discount"   => $this->pre_total_discount,

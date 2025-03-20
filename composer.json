@@ -1,8 +1,8 @@
 {
-    "name": "zahzah/module-transaction",
+    "name": "hanafalah/module-transaction",
     "autoload": {
         "psr-4": {
-            "Zahzah\\ModuleTransaction\\": "src/"
+            "Hanafalah\\ModuleTransaction\\": "src/"
         }
     },
     "authors": [
@@ -14,15 +14,15 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Zahzah\\ModuleTransaction\\ModuleTransactionServiceProvider"
+                "Hanafalah\\ModuleTransaction\\ModuleTransactionServiceProvider"
             ]
         }
     },
     "require": {
-        "gii/module-item": "2.x",
-        "gii/module-service": "2.x",
-        "zahzah/laravel-has-props": "2.x",
-        "zahzah/laravel-support": "2.x"
+        "hanafalah/module-item": "2.x",
+        "hanafalah/module-service": "2.x",
+        "hanafalah/laravel-has-props": "2.x",
+        "hanafalah/laravel-support": "2.x"
     },
     "minimum-stability": "dev",
     "prefer-stable": false

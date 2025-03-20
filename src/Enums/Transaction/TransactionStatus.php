@@ -1,8 +1,9 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Enums\Transaction;
+namespace Hanafalah\ModuleTransaction\Enums\Transaction;
 
-enum TransactionStatus: int{
+enum TransactionStatus: int
+{
     case DRAFT      = 0;
     case ACTIVE     = 1;
     case SUSPENDED  = 2;

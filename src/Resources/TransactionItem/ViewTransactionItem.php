@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\TransactionItem;
+namespace Hanafalah\ModuleTransaction\Resources\TransactionItem;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewTransactionItem extends ApiResource
 {
@@ -22,7 +22,7 @@ class ViewTransactionItem extends ApiResource
             'item_id'         => $this->item_id,
             'item_name'       => $this->item_name
         ];
-        
+
         return $arr;
     }
 }

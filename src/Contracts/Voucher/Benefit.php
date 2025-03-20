@@ -1,8 +1,7 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Contracts\Voucher;
+namespace Hanafalah\ModuleTransaction\Contracts\Voucher;
 
-use Zahzah\LaravelSupport\Contracts\DataManagement;
+use Hanafalah\LaravelSupport\Contracts\DataManagement;
 
-interface Benefit extends DataManagement{
-}
+interface Benefit extends DataManagement {}

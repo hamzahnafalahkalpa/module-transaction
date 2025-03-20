@@ -1,6 +1,6 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Contracts;
+namespace Hanafalah\ModuleTransaction\Contracts;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;

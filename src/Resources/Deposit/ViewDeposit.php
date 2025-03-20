@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Deposit;
+namespace Hanafalah\ModuleTransaction\Resources\Deposit;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewDeposit extends ApiResource
 {
@@ -25,7 +25,7 @@ class ViewDeposit extends ApiResource
             'created_at'     => $this->created_at,
             'updated_at'     => $this->updated_at
         ];
-        
+
         return $arr;
     }
 }

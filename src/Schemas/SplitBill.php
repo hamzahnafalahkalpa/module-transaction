@@ -1,14 +1,15 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Schemas;
+namespace Hanafalah\ModuleTransaction\Schemas;
 
-use Zahzah\LaravelSupport\Supports\PackageManagement;
-use Zahzah\ModuleTransaction\Contracts\SplitBill as ContractsSplitBill;
+use Hanafalah\LaravelSupport\Supports\PackageManagement;
+use Hanafalah\ModuleTransaction\Contracts\SplitBill as ContractsSplitBill;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Zahzah\ModuleTransaction\Resources\SplitBill\ViewSplitBill;
+use Hanafalah\ModuleTransaction\Resources\SplitBill\ViewSplitBill;
 
-class SplitBill extends PackageManagement implements ContractsSplitBill{
+class SplitBill extends PackageManagement implements ContractsSplitBill
+{
     protected string $__entity = 'SplitBill';
     public static $split_bill_model;
 
@@ -17,22 +18,24 @@ class SplitBill extends PackageManagement implements ContractsSplitBill{
         'show' => ViewSplitBill::class,
     ];
 
-    protected function showUsingRelation(): array {
+    protected function showUsingRelation(): array
+    {
         return [
             "paymentHistory.paymentHistoryDetails"
         ];
     }
 
-    public function prepareStoreSplitBill(? array $attributes = null): Model{
+    public function prepareStoreSplitBill(?array $attributes = null): Model
+    {
         $attributes ??= request()->all();
 
         if (!isset($attributes['billing_id'])) throw new \Exception('billing_id is required');
         $payment_method = $this->PaymentMethodModel()->where("name", $attributes['payment_method'])->first();
 
-        if (isset($attributes['payer_type']) && !isset($attributes['invoice_id'])){
-            $payer = $this->{$attributes['payer_type'].'Model'}()->findOrFail($attributes['payer_id']);
-            if ($payer->getMorphClass() == $this->PayerModelMorph()){
-                $payer = $this->{$payer->flag.'Model'}()->findOrFail($attributes['payer_id']);
+        if (isset($attributes['payer_type']) && !isset($attributes['invoice_id'])) {
+            $payer = $this->{$attributes['payer_type'] . 'Model'}()->findOrFail($attributes['payer_id']);
+            if ($payer->getMorphClass() == $this->PayerModelMorph()) {
+                $payer = $this->{$payer->flag . 'Model'}()->findOrFail($attributes['payer_id']);
             }
             $invoice_id = $payer->invoice()->firstOrCreate()->getKey();
             $attributes['invoice_id'] = $invoice_id;
@@ -49,10 +52,10 @@ class SplitBill extends PackageManagement implements ContractsSplitBill{
             'invoice_id'     => $attributes['invoice_id'] ?? null
         ];
 
-        if (isset($attributes['id'])){
+        if (isset($attributes['id'])) {
             $guard      = ['id' => $attributes['id']];
-            $split_bill = $this->SplitBillModel()->updateOrCreate($guard,$add);
-        }else{
+            $split_bill = $this->SplitBillModel()->updateOrCreate($guard, $add);
+        } else {
             $split_bill = $this->SplitBillModel()->create($add);
         }
         $split_bill->paid_money = $attributes['paid_money'] ?? 0;
@@ -65,7 +68,7 @@ class SplitBill extends PackageManagement implements ContractsSplitBill{
         $transaction_split_bill->parent_id = $transaction_billing->getKey();
         $transaction_split_bill->save();
 
-        if (isset($item['bank_id'])){
+        if (isset($item['bank_id'])) {
             $bank = $this->BankModel()->findOrFail($item['bank_id']);
             $split_bill->bank_id = $bank->getKey();
             $split_bill->bank    = [
@@ -75,11 +78,11 @@ class SplitBill extends PackageManagement implements ContractsSplitBill{
                 'account_number' => $bank->account_number
             ];
         }
-        if (isset($attributes['payment_method_detail'])){
-            $this->paymentMethodProp($attributes,$payment_method,$split_bill);
+        if (isset($attributes['payment_method_detail'])) {
+            $this->paymentMethodProp($attributes, $payment_method, $split_bill);
         }
 
-        if (isset($attributes['payment_summaries']) && count($attributes['payment_summaries']) > 0){
+        if (isset($attributes['payment_summaries']) && count($attributes['payment_summaries']) > 0) {
             $payment_history = $this->schemaContract('payment_history')->prepareStorePaymentHistory([
                 'payment_method'    => $attributes['payment_method'],
                 'split_bill'        => $split_bill,
@@ -96,7 +99,7 @@ class SplitBill extends PackageManagement implements ContractsSplitBill{
                 'note'              => $attributes['note'] ?? null,
                 'vouchers'          => $attributes['vouchers'] ?? []
             ]);
-            if (!isset($attributes['total_paid'])){
+            if (!isset($attributes['total_paid'])) {
                 $split_bill->total_paid   = $payment_history->total_paid;
                 $billing->total_paid    ??= 0;
                 $billing->total_debt    ??= 0;
@@ -107,7 +110,7 @@ class SplitBill extends PackageManagement implements ContractsSplitBill{
                 $billing->total_gross    += $payment_history->gross;
                 $billing->total_net      += $payment_history->total_net;
             }
-        }else{
+        } else {
             throw new \Exception('payment_summaries are required');
         }
 
@@ -117,16 +120,17 @@ class SplitBill extends PackageManagement implements ContractsSplitBill{
         return static::$split_bill_model = $split_bill;
     }
 
-    private function paymentMethodProp($attributes,$payment_method,&$split_bill) {
+    private function paymentMethodProp($attributes, $payment_method, &$split_bill)
+    {
         $split_bill_data = $attributes['payment_method_detail'];
         switch ($payment_method->name) {
-            case "E-MONEY" :
+            case "E-MONEY":
                 $props = [
                     "phone_number"     => $split_bill_data['phone_number'] ?? null,
                     "transaction_code" => $split_bill_data['transaction_code'] ?? null,
                 ];
-            break;
-            case "CREDIT CARD" :
+                break;
+            case "CREDIT CARD":
                 $props = [
                     "card_number"     => $split_bill_data['card_number'] ?? null,
                     "card_type"       => $split_bill_data['card_type'] ?? null,
@@ -134,40 +138,51 @@ class SplitBill extends PackageManagement implements ContractsSplitBill{
                     "card_tran_code"  => $split_bill_data['card_tran_code'] ?? null,
                     "bank"            => $split_bill_data['bank'] ?? null,
                 ];
-            break;
-            case "CASH"          : $props = []; break;
-            case "BANK TRANSFER" : $props = []; break;
-            case "DEBIT CARD"    : $props = []; break;
-            default              : $props = [];
+                break;
+            case "CASH":
+                $props = [];
+                break;
+            case "BANK TRANSFER":
+                $props = [];
+                break;
+            case "DEBIT CARD":
+                $props = [];
+                break;
+            default:
+                $props = [];
         }
 
-        $split_bill->setAttribute('payment_method_detail',$props);
+        $split_bill->setAttribute('payment_method_detail', $props);
     }
 
-    public function prepareShowSplitBill(? Model $model = null): ?Model{
+    public function prepareShowSplitBill(?Model $model = null): ?Model
+    {
         $this->booting();
         $model ??= $this->getSplitBill();
-        if (!isset($model)){
+        if (!isset($model)) {
             $id = $attributes['id'] ?? null;
             if (!isset($id)) throw new \Exception('id is required');
             $model = $this->splitBill()->with($this->showUsingRelation())->first();
-        }else{
+        } else {
             $model->load($this->showUsingRelation());
         }
 
         return static::$split_bill_model = $model;
     }
 
-    public function showSplitBill(? Model $model = null): array{
-        return $this->transforming($this->__resources['show'],$this->prepareShowSplitBill($model));
+    public function showSplitBill(?Model $model = null): array
+    {
+        return $this->transforming($this->__resources['show'], $this->prepareShowSplitBill($model));
     }
 
-    public function splitBill(mixed $conditionals = null): Builder{
+    public function splitBill(mixed $conditionals = null): Builder
+    {
         $this->booting();
         return $this->SplitBillModel()->withParameters()->conditionals($conditionals);
     }
 
-    public function getSplitBill(): mixed{
+    public function getSplitBill(): mixed
+    {
         return static::$split_bill_model;
     }
 }

@@ -1,9 +1,7 @@
 <?php
 
-namespace Zahzah\ModuleTransaction;
+namespace Hanafalah\ModuleTransaction;
 
-use Zahzah\ModuleTransaction\Supports\BaseModuleTransaction;
+use Hanafalah\ModuleTransaction\Supports\BaseModuleTransaction;
 
-class ModuleTransaction extends BaseModuleTransaction{
-    
-}
+class ModuleTransaction extends BaseModuleTransaction {}

@@ -1,8 +1,9 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Commands;
+namespace Hanafalah\ModuleTransaction\Commands;
 
-class InstallMakeCommand extends EnvironmentCommand{
+class InstallMakeCommand extends EnvironmentCommand
+{
     /**
      * The name and signature of the console command.
      *
@@ -23,7 +24,7 @@ class InstallMakeCommand extends EnvironmentCommand{
      */
     public function handle()
     {
-        $provider = 'Zahzah\ModuleTransaction\ModuleTransactionServiceProvider';
+        $provider = 'Hanafalah\ModuleTransaction\ModuleTransactionServiceProvider';
 
         $this->comment('Installing Module Transaction...');
         $this->callSilent('vendor:publish', [
@@ -37,11 +38,11 @@ class InstallMakeCommand extends EnvironmentCommand{
             '--tag'      => 'migrations'
         ]);
         $this->info('✔️  Created migrations');
-        
+
         $migrations = $this->setMigrationBasePath(database_path('migrations'))->canMigrate();
         $this->callSilent('migrate', ['--path' => $migrations]);
         $this->info('✔️  App table migrated');
 
-        $this->comment('zahzah/module-transaction installed successfully.');
+        $this->comment('hanafalah/module-transaction installed successfully.');
     }
 }

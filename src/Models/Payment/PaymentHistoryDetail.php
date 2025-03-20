@@ -1,7 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Models\Payment;
+namespace Hanafalah\ModuleTransaction\Models\Payment;
 
-class PaymentHistoryDetail extends PaymentDetail{
+class PaymentHistoryDetail extends PaymentDetail
+{
     protected $table = 'payment_details';
 }

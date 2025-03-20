@@ -1,10 +1,11 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\TariffComponent;
+namespace Hanafalah\ModuleTransaction\Resources\TariffComponent;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
-class ViewTariffComponent extends ApiResource{
+class ViewTariffComponent extends ApiResource
+{
 
     /**
      * Transform the resource into an array.
@@ -26,10 +27,10 @@ class ViewTariffComponent extends ApiResource{
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
-        if (isset($this->price)){
+        if (isset($this->price)) {
             $arr['price'] = $this->price;
         }
-        
+
         return $arr;
     }
 }

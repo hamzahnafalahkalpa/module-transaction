@@ -1,8 +1,8 @@
 <?php
 
-use Zahzah\ModuleTransaction\Models as ModuleTransactionModels;
-use Zahzah\ModuleTransaction\Commands as ModuleTransactionCommands;
-use Zahzah\ModuleTransaction\Contracts;
+use Hanafalah\ModuleTransaction\Models as ModuleTransactionModels;
+use Hanafalah\ModuleTransaction\Commands as ModuleTransactionCommands;
+use Hanafalah\ModuleTransaction\Contracts;
 
 return [
     'commands' => [

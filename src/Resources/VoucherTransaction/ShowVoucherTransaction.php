@@ -1,6 +1,6 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\VoucherTransaction;
+namespace Hanafalah\ModuleTransaction\Resources\VoucherTransaction;
 
 class ShowVoucherTransaction extends ViewVoucherTransaction
 {
@@ -14,18 +14,18 @@ class ShowVoucherTransaction extends ViewVoucherTransaction
     public function toArray(\Illuminate\Http\Request $request): array
     {
         $arr = [
-            'voucher' => $this->relationValidation('voucher',function(){
+            'voucher' => $this->relationValidation('voucher', function () {
                 return $this->voucher->toShowApi();
             }),
-            'consument' => $this->relationValidation('consument',function(){
+            'consument' => $this->relationValidation('consument', function () {
                 return $this->consument->toShowApi();
             }),
-            'payment_history' => $this->relationValidation('paymentHistory',function(){
+            'payment_history' => $this->relationValidation('paymentHistory', function () {
                 return $this->paymentHistory->toShowApi();
             })
         ];
-        $arr = $this->mergeArray(parent::toArray($request),$arr);
-        
+        $arr = $this->mergeArray(parent::toArray($request), $arr);
+
         return $arr;
     }
 }

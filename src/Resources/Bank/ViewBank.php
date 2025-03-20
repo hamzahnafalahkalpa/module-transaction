@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Bank;
+namespace Hanafalah\ModuleTransaction\Resources\Bank;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewBank extends ApiResource
 {
@@ -24,7 +24,7 @@ class ViewBank extends ApiResource
             'created_at'     => $this->created_at,
             'updated_at'     => $this->updated_at
         ];
-        
+
         return $arr;
     }
 }

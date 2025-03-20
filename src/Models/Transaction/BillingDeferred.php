@@ -1,9 +1,10 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Models\Transaction;
+namespace Hanafalah\ModuleTransaction\Models\Transaction;
 
-use Zahzah\ModuleTransaction\Concerns\HasTransaction;
+use Hanafalah\ModuleTransaction\Concerns\HasTransaction;
 
-class BillingDeferred extends Invoice{
+class BillingDeferred extends Invoice
+{
     protected $table = 'invoices';
 }

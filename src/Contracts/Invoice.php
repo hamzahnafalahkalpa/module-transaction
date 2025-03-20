@@ -1,9 +1,7 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Contracts;
+namespace Hanafalah\ModuleTransaction\Contracts;
 
-use Zahzah\LaravelSupport\Contracts\DataManagement;
+use Hanafalah\LaravelSupport\Contracts\DataManagement;
 
-interface Invoice extends DataManagement
-{
-}
+interface Invoice extends DataManagement {}

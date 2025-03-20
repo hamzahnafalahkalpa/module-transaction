@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Bank;
+namespace Hanafalah\ModuleTransaction\Resources\Bank;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ShowBank extends ViewBank
 {
@@ -15,10 +15,9 @@ class ShowBank extends ViewBank
      */
     public function toArray(\Illuminate\Http\Request $request): array
     {
-        $arr = [
-        ];
-        $arr = $this->mergeArray(parent::toArray($request),$arr);
-        
+        $arr = [];
+        $arr = $this->mergeArray(parent::toArray($request), $arr);
+
         return $arr;
     }
 }

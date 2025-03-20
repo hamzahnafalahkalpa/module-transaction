@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Billing;
+namespace Hanafalah\ModuleTransaction\Resources\Billing;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ShowBilling extends ViewBilling
 {
@@ -34,7 +34,7 @@ class ShowBilling extends ViewBilling
             }),
         ];
         $arr = $this->mergeArray(parent::toArray($request), $arr);
-        
+
         return $arr;
     }
 }

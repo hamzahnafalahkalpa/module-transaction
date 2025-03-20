@@ -1,11 +1,13 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Concerns;
+namespace Hanafalah\ModuleTransaction\Concerns;
 
-use Zahzah\ModuleTransaction\Data\PaymentHistoryDTO;
+use Hanafalah\ModuleTransaction\Data\PaymentHistoryDTO;
 
-trait PaymentHistoryMapper{
-    protected function storePaymentHistoryMapper(? array $attributes = null): PaymentHistoryDTO{
+trait PaymentHistoryMapper
+{
+    protected function storePaymentHistoryMapper(?array $attributes = null): PaymentHistoryDTO
+    {
         $valid_attributes = isset($attributes['id']) || (
             isset($attributes['transaction_id']) && isset($attributes['reference_type']) && isset($attributes['reference_id'])
         );

@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Refund;
+namespace Hanafalah\ModuleTransaction\Resources\Refund;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ShowRefund extends ViewRefund
 {
@@ -16,15 +16,15 @@ class ShowRefund extends ViewRefund
     public function toArray(\Illuminate\Http\Request $request): array
     {
         $arr = [
-            'refund_items' => $this->relationValidation('refundItems',function(){
-                return $this->refundItems->transform(function($refundItem){
+            'refund_items' => $this->relationValidation('refundItems', function () {
+                return $this->refundItems->transform(function ($refundItem) {
                     return $refundItem->toViewApi();
                 });
             })
         ];
 
-        $arr = array_merge(parent::toArray($request),$arr);
-        
+        $arr = array_merge(parent::toArray($request), $arr);
+
         return $arr;
     }
 }

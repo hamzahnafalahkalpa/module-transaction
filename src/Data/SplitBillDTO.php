@@ -1,11 +1,12 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Data;
+namespace Hanafalah\ModuleTransaction\Data;
 
 use Illuminate\Database\Eloquent\Model;
-use Zahzah\LaravelSupport\Supports\Data;
+use Hanafalah\LaravelSupport\Supports\Data;
 
-class SplitBillDTO extends Data{
+class SplitBillDTO extends Data
+{
     public function __construct(
         public ?mixed $id,
         public mixed $billing_id,
@@ -19,8 +20,5 @@ class SplitBillDTO extends Data{
         public ?Model $billing,
         public ?int $bank_id,
         ...$args
-    )
-    {
-
-    }    
+    ) {}
 }

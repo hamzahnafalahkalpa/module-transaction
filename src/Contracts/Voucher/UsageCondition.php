@@ -1,7 +1,5 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Contracts\Voucher;
+namespace Hanafalah\ModuleTransaction\Contracts\Voucher;
 
-interface UsageCondition extends Condition{
-    
-}
+interface UsageCondition extends Condition {}

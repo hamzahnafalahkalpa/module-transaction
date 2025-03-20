@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\SplitBill;
+namespace Hanafalah\ModuleTransaction\Resources\SplitBill;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewSplitBill extends ApiResource
 {
@@ -21,13 +21,13 @@ class ViewSplitBill extends ApiResource
             'payment_method'    => $this->payment_method,
             'total_paid'        => $this->total_paid,
             'note'              => $this->note,
-            'payer'             => $this->relationValidation('payer',function(){
+            'payer'             => $this->relationValidation('payer', function () {
                 return $this->payer->toViewApi();
             }),
-            'payment_summary'   => $this->relationValidation('paymentSummary',function(){
+            'payment_summary'   => $this->relationValidation('paymentSummary', function () {
                 return $this->paymentSummary->toViewApi();
             }),
-            'payment_history' => $this->relationValidation('paymentHistory',function(){
+            'payment_history' => $this->relationValidation('paymentHistory', function () {
                 return $this->paymentHistory->toViewApi();
             }),
             'payment_details' => $this->getPaymentDetails(),
@@ -43,7 +43,7 @@ class ViewSplitBill extends ApiResource
             // }),
             'created_at'      => $this->created_at,
         ];
-        
+
         return $arr;
     }
 }

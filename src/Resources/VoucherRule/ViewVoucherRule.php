@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\VoucherRule;
+namespace Hanafalah\ModuleTransaction\Resources\VoucherRule;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewVoucherRule extends ApiResource
 {
@@ -19,7 +19,7 @@ class ViewVoucherRule extends ApiResource
         foreach ($props as $key => $prop) {
             $arr[$key] = $prop;
         }
-        
+
         return $arr;
     }
 }

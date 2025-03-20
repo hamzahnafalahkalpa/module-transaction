@@ -1,6 +1,6 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Enums\Voucher;
+namespace Hanafalah\ModuleTransaction\Enums\Voucher;
 
 enum Status: string
 {

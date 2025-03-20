@@ -1,17 +1,21 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Supports\Condition;
+namespace Hanafalah\ModuleTransaction\Supports\Condition;
 
 use Illuminate\Database\Eloquent\Model;
-use Zahzah\ModuleTransaction\Contracts\Voucher\TransactionCondition as TransactionConditionInterface;
+use Hanafalah\ModuleTransaction\Contracts\Voucher\TransactionCondition as TransactionConditionInterface;
 use Illuminate\Support\Str;
 
-class TransactionCondition extends Condition implements TransactionConditionInterface{
-    public function check(Model $voucher_rule,array $attributes): bool{
+class TransactionCondition extends Condition implements TransactionConditionInterface
+{
+    public function check(Model $voucher_rule, array $attributes): bool
+    {
         $total = static::$__payment_history->total_debt;
         switch (Str::snake($voucher_rule->condition)) {
-            case 'minimum_transaction' : return $total >= $voucher_rule->rule['value'];break;
-            default :
+            case 'minimum_transaction':
+                return $total >= $voucher_rule->rule['value'];
+                break;
+            default:
                 throw new \Exception('Condition not found in Transaction Condition');
         }
         return false;

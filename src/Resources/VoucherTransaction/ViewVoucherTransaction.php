@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\VoucherTransaction;
+namespace Hanafalah\ModuleTransaction\Resources\VoucherTransaction;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewVoucherTransaction extends ApiResource
 {
@@ -11,13 +11,13 @@ class ViewVoucherTransaction extends ApiResource
         $arr = [
             'id'      => $this->id,
             'name'    => $this->name,
-            'voucher' => $this->relationValidation('voucher',function(){
+            'voucher' => $this->relationValidation('voucher', function () {
                 return $this->voucher->toViewApi();
             }),
-            'consument' => $this->relationValidation('consument',function(){
+            'consument' => $this->relationValidation('consument', function () {
                 return $this->consument->toViewApi();
             }),
-            'payment_history' => $this->relationValidation('paymentHistory',function(){
+            'payment_history' => $this->relationValidation('paymentHistory', function () {
                 return $this->paymentHistory->toViewApi();
             })
         ];
@@ -26,7 +26,7 @@ class ViewVoucherTransaction extends ApiResource
         foreach ($props as $key => $prop) {
             $arr[$key] = $prop;
         }
-        
+
         return $arr;
     }
 }

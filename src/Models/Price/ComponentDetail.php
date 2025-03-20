@@ -1,15 +1,16 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Models\Price;
+namespace Hanafalah\ModuleTransaction\Models\Price;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Zahzah\LaravelSupport\Models\BaseModel;
-use Zahzah\LaravelHasProps\Concerns\HasProps;
-use Zahzah\ModuleTransaction\Resources\ComponentDetail\ViewComponentDetail;
-use Zahzah\ModuleTransaction\Resources\TariffComponent\ShowComponentDetail;
+use Hanafalah\LaravelSupport\Models\BaseModel;
+use Hanafalah\LaravelHasProps\Concerns\HasProps;
+use Hanafalah\ModuleTransaction\Resources\ComponentDetail\ViewComponentDetail;
+use Hanafalah\ModuleTransaction\Resources\TariffComponent\ShowComponentDetail;
 
-class ComponentDetail extends BaseModel{
-    
+class ComponentDetail extends BaseModel
+{
+
     use HasUlids, HasProps;
 
     public $timestamps    = false;
@@ -17,19 +18,24 @@ class ComponentDetail extends BaseModel{
     protected $primaryKey = 'id';
     protected $keyType    = 'string';
 
-    protected $fillable = ['id','reference_type','reference_id','flag'];
+    protected $fillable = ['id', 'reference_type', 'reference_id', 'flag'];
 
     protected $casts = [
         'name' => 'string'
     ];
 
-    public function toViewApi(){
+    public function toViewApi()
+    {
         return new ViewComponentDetail($this);
     }
 
-    public function toShowApi(){
+    public function toShowApi()
+    {
         return new ShowComponentDetail($this);
     }
 
-    public function reference(){return $this->morphTo();}
+    public function reference()
+    {
+        return $this->morphTo();
+    }
 }

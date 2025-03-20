@@ -1,8 +1,5 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Contracts;
+namespace Hanafalah\ModuleTransaction\Contracts;
 
-interface InvoiceTransaction extends Transaction
-{
-    
-}
+interface InvoiceTransaction extends Transaction {}

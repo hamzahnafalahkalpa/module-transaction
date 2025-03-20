@@ -4,16 +4,17 @@ use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Zahzah\ModuleTransaction\Enums\Bank\Status;
-use Zahzah\ModuleTransaction\Models\Price\Bank;
+use Hanafalah\ModuleTransaction\Enums\Bank\Status;
+use Hanafalah\ModuleTransaction\Models\Price\Bank;
 
 return new class extends Migration
 {
-   use Zahzah\LaravelSupport\Concerns\NowYouSeeMe;
+    use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
     private $__table;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->__table = app(config('database.models.Bank', Bank::class));
     }
 
@@ -25,14 +26,14 @@ return new class extends Migration
     public function up(): void
     {
         $table_name = $this->__table->getTable();
-        if (!$this->isTableExists()){
+        if (!$this->isTableExists()) {
             Schema::create($table_name, function (Blueprint $table) {
                 $table->id();
                 $table->string('name', 50)->nullable();
                 $table->string('account_number', 36)->nullable();
-                $table->string('account_name',50)->nullable();
-                $table->string('status',10)->nullable(false)
-                      ->default(Status::ACTIVE->value);
+                $table->string('account_name', 50)->nullable();
+                $table->string('status', 10)->nullable(false)
+                    ->default(Status::ACTIVE->value);
                 $table->timestamps();
                 $table->softDeletes();
             });

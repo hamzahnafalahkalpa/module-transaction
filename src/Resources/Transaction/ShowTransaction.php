@@ -1,10 +1,10 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Transaction;
+namespace Hanafalah\ModuleTransaction\Resources\Transaction;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
-use Zahzah\ModuleTransaction\Resources\PaymentDetail\ShowPaymentDetail;
-use Zahzah\ModuleTransaction\Resources\PaymentSummary\ShowPaymentSummary;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\ModuleTransaction\Resources\PaymentDetail\ShowPaymentDetail;
+use Hanafalah\ModuleTransaction\Resources\PaymentSummary\ShowPaymentSummary;
 
 class ShowTransaction extends ViewTransaction
 {
@@ -21,19 +21,19 @@ class ShowTransaction extends ViewTransaction
         //     $this->load('childs');
         // }
         $arr = [
-            'reference'       => $this->relationValidation('reference',function(){
+            'reference'       => $this->relationValidation('reference', function () {
                 return  $this->reference->toShowApi();
             }),
-            'visit_patient'   => $this->relationValidation('reference',function(){
-                $this->reference->load(["services","transaction"]);
+            'visit_patient'   => $this->relationValidation('reference', function () {
+                $this->reference->load(["services", "transaction"]);
                 return $this->reference->toShowApi();
             }),
             'payment_summary' => $this->relationValidation('paymentSummary', function () {
                 // $this->paymentSummary->load(['paymentDetails' => function($q) {
                 //     $q->whereNotNull("payment_history_id")->with("paymentHistory");
                 // }]);
-//                return $this->paymentSummary->toShowApi();
-                 return new ShowPaymentSummary($this->paymentSummary);
+                //                return $this->paymentSummary->toShowApi();
+                return new ShowPaymentSummary($this->paymentSummary);
             }),
             'payment_history' => $this->relationValidation('paymentHistory', function () {
                 return new ShowPaymentSummary($this->paymentHistory);
@@ -43,7 +43,7 @@ class ShowTransaction extends ViewTransaction
             })
         ];
         $arr = $this->mergeArray(parent::toArray($request), $arr);
-        
+
         return $arr;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\RefundItem;
+namespace Hanafalah\ModuleTransaction\Resources\RefundItem;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewRefundItem extends ApiResource
 {
@@ -17,14 +17,14 @@ class ViewRefundItem extends ApiResource
     {
         $arr = [
             'id'     => $this->id,
-            'refund' => $this->relationValidation('refund',function(){
+            'refund' => $this->relationValidation('refund', function () {
                 return $this->refund->toViewApi();
             }),
-            'item'   => $this->relationValidation('item',function(){
+            'item'   => $this->relationValidation('item', function () {
                 return $this->item->toViewApi();
             })
         ];
-        
+
         return $arr;
     }
 }

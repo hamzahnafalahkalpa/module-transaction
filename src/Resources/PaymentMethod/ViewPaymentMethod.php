@@ -1,10 +1,11 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\PaymentMethod;
+namespace Hanafalah\ModuleTransaction\Resources\PaymentMethod;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
-class ViewPaymentMethod extends ApiResource{
+class ViewPaymentMethod extends ApiResource
+{
 
     /**
      * Transform the resource into an array.
@@ -19,12 +20,12 @@ class ViewPaymentMethod extends ApiResource{
             'name'              => $this->name,
         ];
         $props = $this->getPropsData();
-        if(isset($props) && count($props) > 0) {
+        if (isset($props) && count($props) > 0) {
             foreach ($props as $key => $prop) {
                 $arr[$key] = $prop;
             }
         }
-        
+
         return $arr;
     }
 }

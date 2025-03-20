@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\TransactionItem;
+namespace Hanafalah\ModuleTransaction\Resources\TransactionItem;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ShowTransactionItem extends ViewTransactionItem
 {
@@ -18,13 +18,13 @@ class ShowTransactionItem extends ViewTransactionItem
         $arr = [
             'id'              => $this->id,
             'item_name'       => $this->item_name,
-            'item'            => $this->relationValidation('item',function(){
+            'item'            => $this->relationValidation('item', function () {
                 $item = $this->item;
                 return $item->toShowApi();
             })
         ];
-        $arr = $this->mergeArray(parent::toArray($request),$arr);
-        
+        $arr = $this->mergeArray(parent::toArray($request), $arr);
+
         return $arr;
     }
 }

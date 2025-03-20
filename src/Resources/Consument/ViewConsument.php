@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Consument;
+namespace Hanafalah\ModuleTransaction\Resources\Consument;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewConsument extends ApiResource
 {
@@ -13,7 +13,7 @@ class ViewConsument extends ApiResource
             'uuid'       => $this->uuid,
             'name'       => $this->name,
             'phone'      => $this->phone,
-            'reference'  => $this->relationValidation('reference',function(){
+            'reference'  => $this->relationValidation('reference', function () {
                 return $this->reference->toViewApi();
             }),
             'props'       => $this->getPropsData() ?? null,
@@ -21,8 +21,7 @@ class ViewConsument extends ApiResource
             'updated_at'  => $this->updated_at
         ];
 
-        
+
         return $arr;
     }
 }
-

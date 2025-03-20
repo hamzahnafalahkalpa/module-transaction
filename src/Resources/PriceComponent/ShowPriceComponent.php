@@ -1,8 +1,9 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\PriceComponent;
+namespace Hanafalah\ModuleTransaction\Resources\PriceComponent;
 
-class ShowPriceComponent extends ViewPriceComponent{
+class ShowPriceComponent extends ViewPriceComponent
+{
 
     /**
      * Transform the resource into an array.
@@ -13,12 +14,12 @@ class ShowPriceComponent extends ViewPriceComponent{
     public function toArray(\Illuminate\Http\Request $request): array
     {
         $arr = [
-            'tariff_component' => $this->relationValidation('tariffComponent',function(){
+            'tariff_component' => $this->relationValidation('tariffComponent', function () {
                 return $this->tariffComponent->toShowApi();
             })
         ];
-        $arr = $this->mergeArray(parent::toArray($request),$arr);
-        
+        $arr = $this->mergeArray(parent::toArray($request), $arr);
+
         return $arr;
     }
 }

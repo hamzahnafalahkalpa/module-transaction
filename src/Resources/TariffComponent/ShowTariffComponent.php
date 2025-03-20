@@ -1,8 +1,9 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\TariffComponent;
+namespace Hanafalah\ModuleTransaction\Resources\TariffComponent;
 
-class ShowTariffComponent extends ViewTariffComponent{
+class ShowTariffComponent extends ViewTariffComponent
+{
 
     /**
      * Transform the resource into an array.
@@ -13,8 +14,8 @@ class ShowTariffComponent extends ViewTariffComponent{
     public function toArray(\Illuminate\Http\Request $request): array
     {
         $arr = [];
-        $arr = $this->mergeArray(parent::toArray($request),$arr);
-        
+        $arr = $this->mergeArray(parent::toArray($request), $arr);
+
         return $arr;
     }
 }

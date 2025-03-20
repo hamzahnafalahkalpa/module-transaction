@@ -1,24 +1,36 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Models\Price;
+namespace Hanafalah\ModuleTransaction\Models\Price;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Zahzah\LaravelHasProps\Concerns\HasProps;
-use Zahzah\LaravelSupport\Models\BaseModel;
+use Hanafalah\LaravelHasProps\Concerns\HasProps;
+use Hanafalah\LaravelSupport\Models\BaseModel;
 
-class ModelHasVoucher extends BaseModel {
-    use HasUlids,HasProps;
+class ModelHasVoucher extends BaseModel
+{
+    use HasUlids, HasProps;
 
     public $incrementing  = false;
     protected $keyType    = 'string';
     protected $primaryKey = 'id';
     protected $list       = [
-        'id', 'model_id', 'model_type', 'voucher_id','props'
+        'id',
+        'model_id',
+        'model_type',
+        'voucher_id',
+        'props'
     ];
-    protected static function booted(): void{
+    protected static function booted(): void
+    {
         parent::booted();
     }
 
-    public function reference(){return $this->morphTo();}
-    public function voucher(){return $this->belongsToModel("Voucher");}
+    public function reference()
+    {
+        return $this->morphTo();
+    }
+    public function voucher()
+    {
+        return $this->belongsToModel("Voucher");
+    }
 }

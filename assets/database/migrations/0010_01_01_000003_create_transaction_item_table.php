@@ -3,13 +3,13 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Zahzah\ModuleTransaction\Models\Transaction\TransactionItem;
-use Zahzah\ModuleTransaction\Enums\Transaction\TransactionStatus;
-use Zahzah\ModuleTransaction\Models\Transaction\Transaction;
+use Hanafalah\ModuleTransaction\Models\Transaction\TransactionItem;
+use Hanafalah\ModuleTransaction\Enums\Transaction\TransactionStatus;
+use Hanafalah\ModuleTransaction\Models\Transaction\Transaction;
 
 return new class extends Migration
 {
-   use Zahzah\LaravelSupport\Concerns\NowYouSeeMe;
+    use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
     private $__table;
 
@@ -43,7 +43,7 @@ return new class extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
-                $table->index(['item_type', 'item_id'],'item_ref');
+                $table->index(['item_type', 'item_id'], 'item_ref');
             });
 
             Schema::table($table_name, function (Blueprint $table) {

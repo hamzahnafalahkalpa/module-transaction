@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Refund;
+namespace Hanafalah\ModuleTransaction\Resources\Refund;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewRefund extends ApiResource
 {
@@ -36,7 +36,7 @@ class ViewRefund extends ApiResource
         foreach ($props as $key => $prop) {
             $arr[$key] = $prop;
         }
-        
+
         return $arr;
     }
 }

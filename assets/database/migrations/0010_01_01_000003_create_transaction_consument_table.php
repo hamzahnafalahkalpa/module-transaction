@@ -3,13 +3,13 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Zahzah\ModuleTransaction\Models\Transaction\TransactionHasConsument;
-use Zahzah\ModuleTransaction\Models\Consument\Consument;
-use Zahzah\ModuleTransaction\Models\Transaction\Transaction;
+use Hanafalah\ModuleTransaction\Models\Transaction\TransactionHasConsument;
+use Hanafalah\ModuleTransaction\Models\Consument\Consument;
+use Hanafalah\ModuleTransaction\Models\Transaction\Transaction;
 
 return new class extends Migration
 {
-   use Zahzah\LaravelSupport\Concerns\NowYouSeeMe;
+    use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
     private $__table;
 

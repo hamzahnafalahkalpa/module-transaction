@@ -1,6 +1,6 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Voucher;
+namespace Hanafalah\ModuleTransaction\Resources\Voucher;
 
 class ShowVoucher extends ViewVoucher
 {
@@ -14,17 +14,17 @@ class ShowVoucher extends ViewVoucher
     public function toArray(\Illuminate\Http\Request $request): array
     {
         $arr = [
-            'author'              => $this->relationValidation('employee',function(){
+            'author'              => $this->relationValidation('employee', function () {
                 return $this->author->toShowApi();
             }),
-            'voucher_rules'       => $this->relationValidation('voucherRules',function(){
-                return $this->voucherRules->transform(function($voucherRule){
+            'voucher_rules'       => $this->relationValidation('voucherRules', function () {
+                return $this->voucherRules->transform(function ($voucherRule) {
                     return $voucherRule->toShowApi();
                 });
             })
         ];
-        $arr = $this->mergeArray(parent::toArray($request),$arr);
-        
+        $arr = $this->mergeArray(parent::toArray($request), $arr);
+
         return $arr;
     }
 }

@@ -4,15 +4,16 @@ use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Zahzah\ModuleTransaction\Models\Transaction\Invoice;
+use Hanafalah\ModuleTransaction\Models\Transaction\Invoice;
 
 return new class extends Migration
 {
-   use Zahzah\LaravelSupport\Concerns\NowYouSeeMe;
+    use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
     private $__table;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->__table = app(config('database.models.Invoice', Invoice::class));
     }
 
@@ -24,7 +25,7 @@ return new class extends Migration
     public function up(): void
     {
         $table_name = $this->__table->getTable();
-        if (!$this->isTableExists()){
+        if (!$this->isTableExists()) {
             Schema::create($table_name, function (Blueprint $table) {
                 $table->ulid('id')->primary();
                 $table->string('invoice_code')->nullable();
@@ -39,8 +40,8 @@ return new class extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
-                $table->index(['author_id','author_type'],'author_ref');
-                $table->index(['consument_id','consument_type'],'consument_at');
+                $table->index(['author_id', 'author_type'], 'author_ref');
+                $table->index(['consument_id', 'consument_type'], 'consument_at');
             });
         }
     }

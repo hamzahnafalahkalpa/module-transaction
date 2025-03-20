@@ -1,13 +1,14 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Concerns;
+namespace Hanafalah\ModuleTransaction\Concerns;
 
-trait HasPaymentSummary{
+trait HasPaymentSummary
+{
 
     public static function bootHasPaymentSummary()
     {
         static::created(function ($model) {
-            if (\method_exists($model,'transaction')){
+            if (\method_exists($model, 'transaction')) {
                 $transaction = $model->transaction()->firstOrCreate();
                 $transaction_id = $transaction->getKey();
             }
@@ -19,11 +20,13 @@ trait HasPaymentSummary{
         });
     }
 
-    public function paymentSummary(){
-        return $this->morphOneModel('PaymentSummary','reference');
+    public function paymentSummary()
+    {
+        return $this->morphOneModel('PaymentSummary', 'reference');
     }
 
-    public function paymentSummaries(){
-        return $this->morphManyModel('PaymentSummary','reference');
+    public function paymentSummaries()
+    {
+        return $this->morphManyModel('PaymentSummary', 'reference');
     }
 }

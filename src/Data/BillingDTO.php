@@ -1,11 +1,12 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Data;
+namespace Hanafalah\ModuleTransaction\Data;
 
 use Carbon\Carbon;
-use Zahzah\LaravelSupport\Supports\Data;
+use Hanafalah\LaravelSupport\Supports\Data;
 
-class BillingDTO extends Data{
+class BillingDTO extends Data
+{
     public function __construct(
         public ?mixed $id,
         public mixed $transaction_id,
@@ -16,5 +17,5 @@ class BillingDTO extends Data{
         public mixed $cashier_id,
         public ?array $split_bills,
         ...$args
-    ){}    
+    ) {}
 }

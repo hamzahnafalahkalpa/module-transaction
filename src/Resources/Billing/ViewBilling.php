@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Billing;
+namespace Hanafalah\ModuleTransaction\Resources\Billing;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
 class ViewBilling extends ApiResource
 {
@@ -21,16 +21,16 @@ class ViewBilling extends ApiResource
             'id'             => $this->id,
             'billing_code'   => $this->billing_code,
             'transaction_id' => $this->transaction_id,
-            'author'         => $this->relationValidation('author',function(){
+            'author'         => $this->relationValidation('author', function () {
                 return $this->author->toViewApi();
             }),
-            'cashier'        => $this->relationValidation('cashier',function(){
+            'cashier'        => $this->relationValidation('cashier', function () {
                 return $this->cashier->toViewApi();
             }),
-            'transaction'  => $this->relationValidation('hasTransaction',function() {
-                    return $this->hasTransaction->toShowApi();
+            'transaction'  => $this->relationValidation('hasTransaction', function () {
+                return $this->hasTransaction->toShowApi();
             }),
-            'transaction_billing' => $this->relationValidation('transaction',function() {
+            'transaction_billing' => $this->relationValidation('transaction', function () {
                 return $this->transaction->toShowApi();
             }),
             'total_debt'     => $this->total_debt ?? 0,
@@ -39,7 +39,7 @@ class ViewBilling extends ApiResource
             'created_at'     => $this->created_at,
             'updated_at'     => $this->updated_at
         ];
-        
+
         return $arr;
     }
 }

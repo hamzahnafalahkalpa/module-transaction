@@ -1,36 +1,40 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Schemas;
+namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Zahzah\LaravelSupport\Supports\PackageManagement;
-use Zahzah\ModuleTransaction\Contracts\VoucherRule as ContractsVoucherRule;
-use Zahzah\ModuleTransaction\Resources\VoucherRule\{ViewVoucherRule, ShowVoucherRule};
+use Hanafalah\LaravelSupport\Supports\PackageManagement;
+use Hanafalah\ModuleTransaction\Contracts\VoucherRule as ContractsVoucherRule;
+use Hanafalah\ModuleTransaction\Resources\VoucherRule\{ViewVoucherRule, ShowVoucherRule};
 
-class VoucherRule extends PackageManagement implements ContractsVoucherRule{
+class VoucherRule extends PackageManagement implements ContractsVoucherRule
+{
     public static $voucher_rule_model;
 
-    
+
     protected array $__resources = [
         'view' => ViewVoucherRule::class,
         'show' => ShowVoucherRule::class
     ];
 
-    public function showUsingRelation(): array {
+    public function showUsingRelation(): array
+    {
         return ['voucher'];
     }
 
-    public function getVoucherRule(): mixed{
+    public function getVoucherRule(): mixed
+    {
         return static::$voucher_rule_model;
     }
 
-    public function prepareStoreVoucherRule(? array $attributes = null): Model{
+    public function prepareStoreVoucherRule(?array $attributes = null): Model
+    {
         $attributes ??= request()->all();
 
         $model = $this->VoucherRuleModel()->updateOrCreate([
             'id' => $attributes['id'] ?? null
-        ],[
+        ], [
             'name'       => $attributes['name'],
             'voucher_id' => $attributes['voucher_id'],
             'condition'  => $attributes['condition']
@@ -41,45 +45,51 @@ class VoucherRule extends PackageManagement implements ContractsVoucherRule{
         return static::$voucher_rule_model = $model;
     }
 
-    public function storeVoucherRule(): array {
-        return $this->transaction(function(){
+    public function storeVoucherRule(): array
+    {
+        return $this->transaction(function () {
             return $this->prrepareStoreVoucherRule();
         });
     }
 
-    public function prepareShowVoucherRule(? Model $model = null, ? array $attributes = null): Model{
+    public function prepareShowVoucherRule(?Model $model = null, ?array $attributes = null): Model
+    {
         $attributes ??= request()->all();
 
         $model ??= $this->getVoucherRule();
-        if (isset($attributes['id'])){
+        if (isset($attributes['id'])) {
             $id = $attributes['id'] ?? null;
             if (!isset($id)) throw new \Exception('Id not found');
             $model = $model->with($this->showUsingRelation())->findOrFail($id);
-        }else{
+        } else {
             $model->load($this->showUsingRelation());
         }
         return static::$voucher_rule_model = $model;
     }
 
-    public function showVoucherRule(? Model $model = null): array{
-        return $this->transforming($this->__resources['show'],function() use ($model){
+    public function showVoucherRule(?Model $model = null): array
+    {
+        return $this->transforming($this->__resources['show'], function () use ($model) {
             return $this->prepareShowVoucherRule($model);
         });
     }
 
-    public function prepareViewVoucherRuleList(? array $attributes = null): array{
+    public function prepareViewVoucherRuleList(?array $attributes = null): array
+    {
         $attributes ??= request()->all();
 
-        return static::$voucher_rule_model = $this->voucherRule()->orderBy('name','asc')->get();
+        return static::$voucher_rule_model = $this->voucherRule()->orderBy('name', 'asc')->get();
     }
 
-    public function viewVoucherRuleList(): array {
-        return $this->transforming($this->__resources['view'],function(){
+    public function viewVoucherRuleList(): array
+    {
+        return $this->transforming($this->__resources['view'], function () {
             return $this->prepareViewVoucherRuleList();
         });
     }
 
-    public function prepareDeleteVoucherRule(? array $attributes = null): bool{
+    public function prepareDeleteVoucherRule(?array $attributes = null): bool
+    {
         $attributes ??= request()->all();
         if (!isset($attributes['id'])) throw new \Exception('Id not found');
 
@@ -87,14 +97,16 @@ class VoucherRule extends PackageManagement implements ContractsVoucherRule{
         return $model->delete();
     }
 
-    public function deleteVoucherRule(): bool{
-        return $this->transaction(function(){
+    public function deleteVoucherRule(): bool
+    {
+        return $this->transaction(function () {
             return $this->prepareDeleteVoucherRule();
         });
     }
 
-    public function voucherRule(): Builder{
+    public function voucherRule(): Builder
+    {
         $this->booting();
-        return $this->VoucherRuleModel()->withParameters()->orderBy('name','asc');
+        return $this->VoucherRuleModel()->withParameters()->orderBy('name', 'asc');
     }
 }

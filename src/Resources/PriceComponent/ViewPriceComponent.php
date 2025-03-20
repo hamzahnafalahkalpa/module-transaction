@@ -1,10 +1,11 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\PriceComponent;
+namespace Hanafalah\ModuleTransaction\Resources\PriceComponent;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
 
-class ViewPriceComponent extends ApiResource{
+class ViewPriceComponent extends ApiResource
+{
 
     /**
      * Transform the resource into an array.
@@ -16,14 +17,14 @@ class ViewPriceComponent extends ApiResource{
     {
         $arr = [
             'id'         => $this->id,
-            'price'      => $this->price, 
-            'tariff_component' => $this->relationValidation('tariffComponent',function(){
+            'price'      => $this->price,
+            'tariff_component' => $this->relationValidation('tariffComponent', function () {
                 return $this->tariffComponent->toViewApi();
             }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
-        
+
         return $arr;
     }
 }

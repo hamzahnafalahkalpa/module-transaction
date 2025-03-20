@@ -1,6 +1,6 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Enums\Bank;
+namespace Hanafalah\ModuleTransaction\Enums\Bank;
 
 enum Status: string
 {

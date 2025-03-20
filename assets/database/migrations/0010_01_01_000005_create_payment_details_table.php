@@ -4,20 +4,21 @@ use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Zahzah\ModuleTransaction\{
+use Hanafalah\ModuleTransaction\{
     Models\Payment\PaymentDetail
 };
-use Zahzah\ModuleTransaction\Models\Payment\PaymentHistory;
-use Zahzah\ModuleTransaction\Models\Payment\PaymentSummary;
-use Zahzah\ModuleTransaction\Models\Transaction\TransactionItem;
+use Hanafalah\ModuleTransaction\Models\Payment\PaymentHistory;
+use Hanafalah\ModuleTransaction\Models\Payment\PaymentSummary;
+use Hanafalah\ModuleTransaction\Models\Transaction\TransactionItem;
 
 return new class extends Migration
 {
-   use Zahzah\LaravelSupport\Concerns\NowYouSeeMe;
+    use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
     private $__table;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->__table = app(config('database.models.PaymentDetail', PaymentDetail::class));
     }
 
@@ -29,25 +30,25 @@ return new class extends Migration
     public function up(): void
     {
         $table_name = $this->__table->getTable();
-        if (!$this->isTableExists()){
+        if (!$this->isTableExists()) {
             Schema::create($table_name, function (Blueprint $table) {
-                $payment_summary        = app(config('database.models.PaymentSummary',PaymentSummary::class));
-                $transaction_item       = app(config('database.models.TransactionItem',TransactionItem::class));
-                $payment_history        = app(config('database.models.PaymentHistory',PaymentHistory::class));
-                $payment_detail         = app(config('database.models.PaymentDetail',PaymentDetail::class));
+                $payment_summary        = app(config('database.models.PaymentSummary', PaymentSummary::class));
+                $transaction_item       = app(config('database.models.TransactionItem', TransactionItem::class));
+                $payment_history        = app(config('database.models.PaymentHistory', PaymentHistory::class));
+                $payment_detail         = app(config('database.models.PaymentDetail', PaymentDetail::class));
 
                 $table->ulid('id')->primary();
                 $table->foreignIdFor($payment_summary::class)->nullable()->index()
-                      ->constrained()->cascadeOnUpdate()->restrictOnDelete();
+                    ->constrained()->cascadeOnUpdate()->restrictOnDelete();
 
                 $table->foreignIdFor($payment_history::class)->nullable()->index()
-                      ->constrained()->cascadeOnUpdate()->restrictOnDelete();
+                    ->constrained()->cascadeOnUpdate()->restrictOnDelete();
 
                 $table->foreignIdFor($transaction_item::class)->nullable()->index()
-                      ->constrained()->cascadeOnUpdate()->restrictOnDelete();
+                    ->constrained()->cascadeOnUpdate()->restrictOnDelete();
 
                 $table->foreignIdFor($payment_detail::class)->nullable()->index()
-                      ->constrained()->cascadeOnUpdate()->restrictOnDelete();
+                    ->constrained()->cascadeOnUpdate()->restrictOnDelete();
 
                 $table->integer('amount')->nullable()->default(0);
                 $table->integer('qty')->nullable()->default(0);
@@ -65,11 +66,11 @@ return new class extends Migration
                 $table->softDeletes();
             });
 
-            Schema::table($table_name,function (Blueprint $table){
-                $table->foreignIdFor($this->__table::class,'parent_id')
-                      ->nullable()->after('id')
-                      ->index()->constrained()
-                      ->cascadeOnUpdate()->restrictOnDelete();
+            Schema::table($table_name, function (Blueprint $table) {
+                $table->foreignIdFor($this->__table::class, 'parent_id')
+                    ->nullable()->after('id')
+                    ->index()->constrained()
+                    ->cascadeOnUpdate()->restrictOnDelete();
             });
         }
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\Invoice;
+namespace Hanafalah\ModuleTransaction\Resources\Invoice;
 
-use Zahzah\ModuleTransaction\Resources\PaymentSummary\ShowPaymentSummary;
+use Hanafalah\ModuleTransaction\Resources\PaymentSummary\ShowPaymentSummary;
 
 class ShowInvoice extends ViewInvoice
 {
@@ -16,13 +16,13 @@ class ShowInvoice extends ViewInvoice
     public function toArray(\Illuminate\Http\Request $request): array
     {
         $arr = [
-            'payment_summary'   => $this->relationValidation('paymentSummary',function(){
+            'payment_summary'   => $this->relationValidation('paymentSummary', function () {
                 $paymentSummary = $this->paymentSummary;
                 return new ShowPaymentSummary($paymentSummary);
             })
         ];
         $arr = $this->mergeArray(parent::toArray($request), $arr);
-        
+
         return $arr;
     }
 }

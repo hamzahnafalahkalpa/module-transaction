@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Zahzah\ModuleTransaction;
-use Zahzah\LaravelSupport\Providers\BaseServiceProvider;
+namespace Hanafalah\ModuleTransaction;
+
+use Hanafalah\LaravelSupport\Providers\BaseServiceProvider;
 
 class ModuleTransactionServiceProvider extends BaseServiceProvider
 {
@@ -15,9 +16,10 @@ class ModuleTransactionServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->registerMainClass(ModuleTransaction::class)
-             ->registerCommandService(Providers\CommandServiceProvider::class)
-             ->registers([
-                '*','Services' => function(){
+            ->registerCommandService(Providers\CommandServiceProvider::class)
+            ->registers([
+                '*',
+                'Services' => function () {
                     $this->binds([
                         Contracts\ModuleTransaction::class            => ModuleTransaction::class,
                         Contracts\Transaction::class                  => Schemas\Transaction::class,
@@ -52,11 +54,13 @@ class ModuleTransactionServiceProvider extends BaseServiceProvider
      *
      * @return string
      */
-    protected function dir(): string{
-        return __DIR__.'/';
+    protected function dir(): string
+    {
+        return __DIR__ . '/';
     }
 
-    protected function migrationPath(string $path = ''): string{
+    protected function migrationPath(string $path = ''): string
+    {
         return database_path($path);
     }
 }

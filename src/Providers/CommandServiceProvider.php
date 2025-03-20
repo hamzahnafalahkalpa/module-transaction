@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Zahzah\ModuleTransaction\Providers;
+namespace Hanafalah\ModuleTransaction\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Zahzah\ModuleTransaction\Commands;
+use Hanafalah\ModuleTransaction\Commands;
 
 class CommandServiceProvider extends ServiceProvider
 {
@@ -14,8 +14,9 @@ class CommandServiceProvider extends ServiceProvider
     ];
 
 
-    public function register(){
-        $this->commands(config('module-transaction.commands',$this->commands));
+    public function register()
+    {
+        $this->commands(config('module-transaction.commands', $this->commands));
     }
     /**
      * Get the services provided by the provider.

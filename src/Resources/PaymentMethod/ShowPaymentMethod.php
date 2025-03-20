@@ -1,11 +1,12 @@
 <?php
 
-namespace Zahzah\ModuleTransaction\Resources\PaymentMethod;
+namespace Hanafalah\ModuleTransaction\Resources\PaymentMethod;
 
-use Zahzah\LaravelSupport\Resources\ApiResource;
-use Zahzah\ModuleTransaction\Resources\TransactionItem\ShowTransactionItem;
+use Hanafalah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\ModuleTransaction\Resources\TransactionItem\ShowTransactionItem;
 
-class ShowPaymentMethod extends ViewPaymentMethod{
+class ShowPaymentMethod extends ViewPaymentMethod
+{
 
     /**
      * Transform the resource into an array.
@@ -17,7 +18,7 @@ class ShowPaymentMethod extends ViewPaymentMethod{
     {
         $arr = [];
         $arr = $this->mergeArray(parent::toArray($request), $arr);
-        
+
         return $arr;
     }
 }

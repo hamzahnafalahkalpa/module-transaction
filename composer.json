@@ -19,10 +19,10 @@
         }
     },
     "require": {
-        "hanafalah/module-item": "2.x",
-        "hanafalah/module-service": "2.x",
-        "hanafalah/laravel-has-props": "2.x",
-        "hanafalah/laravel-support": "2.x"
+        "hanafalah/module-item": "1.x",
+        "hanafalah/module-service": "1.x",
+        "hanafalah/laravel-has-props": "1.x",
+        "hanafalah/laravel-support": "1.x"
     },
     "minimum-stability": "dev",
     "prefer-stable": false

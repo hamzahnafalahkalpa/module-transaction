@@ -8,28 +8,35 @@ return [
     'commands' => [
         ModuleTransactionCommands\InstallMakeCommand::class
     ],
-    'contracts'  => [
-        'consument'              => Contracts\Consument::class,
-        'refund'                 => Contracts\Refund::class,
-        'split_bill'             => Contracts\SplitBill::class,
-        'billing'                => Contracts\Billing::class,
-        'deposit'                => Contracts\Deposit::class,
-        'invoice'                => Contracts\Invoice::class,
-        'transaction'            => Contracts\Transaction::class,
-        'transaction_item'       => Contracts\TransactionItem::class,
-        'bank'                   => Contracts\Bank::class,
-        'voucher'                => Contracts\Voucher::class,
-        'voucher_rule'           => Contracts\VoucherRule::class,
-        // 'voucher_transaction'    => Contracts\VoucherTransaction::class,
-        // 'component_detail'       => Contracts\ComponentDetail::class,
-        'price_component'        => Contracts\PriceComponent::class,
-        'tariff_component'       => Contracts\TariffComponent::class,
-        'payment_detail'         => Contracts\PaymentDetail::class,
-        'payment_history'        => Contracts\PaymentHistory::class,
-        'payment_history_detail' => Contracts\PaymentHistoryDetail::class,
-        'payment_summary'        => Contracts\PaymentSummary::class,
-        'payment_method'         => Contracts\PaymentMethod::class,
-        'condition'              => Contracts\Voucher\Condition::class
+    'libs' => [
+        'model' => 'Models',
+        'contract' => 'Contracts',
+        'schema' => 'Schemas'
+    ],
+    'app' => [
+        'contracts'  => [
+            'consument'              => Contracts\Consument::class,
+            'refund'                 => Contracts\Refund::class,
+            'split_bill'             => Contracts\SplitBill::class,
+            'billing'                => Contracts\Billing::class,
+            'deposit'                => Contracts\Deposit::class,
+            'invoice'                => Contracts\Invoice::class,
+            'transaction'            => Contracts\Transaction::class,
+            'transaction_item'       => Contracts\TransactionItem::class,
+            'bank'                   => Contracts\Bank::class,
+            'voucher'                => Contracts\Voucher::class,
+            'voucher_rule'           => Contracts\VoucherRule::class,
+            // 'voucher_transaction'    => Contracts\VoucherTransaction::class,
+            // 'component_detail'       => Contracts\ComponentDetail::class,
+            'price_component'        => Contracts\PriceComponent::class,
+            'tariff_component'       => Contracts\TariffComponent::class,
+            'payment_detail'         => Contracts\PaymentDetail::class,
+            'payment_history'        => Contracts\PaymentHistory::class,
+            'payment_history_detail' => Contracts\PaymentHistoryDetail::class,
+            'payment_summary'        => Contracts\PaymentSummary::class,
+            'payment_method'         => Contracts\PaymentMethod::class,
+            'condition'              => Contracts\Voucher\Condition::class
+        ],
     ],
     'database'   => [
         'models' => [

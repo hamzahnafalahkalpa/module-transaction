@@ -3,7 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\PaymentMethod as ContractsPaymentMethod;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\PaymentMethod as ContractsPaymentMethod;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;

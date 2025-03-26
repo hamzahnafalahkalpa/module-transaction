@@ -1,9 +1,9 @@
 <?php
 
-namespace Hanafalah\ModuleTransaction\Contracts;
+namespace Hanafalah\ModuleTransaction\Contracts\Schemas;
 
 use Illuminate\Database\Eloquent\Model;
-use Hanafalah\LaravelSupport\Contracts\DataManagement;
+use Hanafalah\LaravelSupport\Contracts\Supports\DataManagement;
 
 interface TransactionItem extends DataManagement
 {

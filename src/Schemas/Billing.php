@@ -3,7 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\Billing as ContractsBilling;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\Billing as ContractsBilling;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

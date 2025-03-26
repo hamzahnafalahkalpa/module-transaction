@@ -5,7 +5,7 @@ namespace Hanafalah\ModuleTransaction\Schemas;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\VoucherRule as ContractsVoucherRule;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\VoucherRule as ContractsVoucherRule;
 use Hanafalah\ModuleTransaction\Resources\VoucherRule\{ViewVoucherRule, ShowVoucherRule};
 
 class VoucherRule extends PackageManagement implements ContractsVoucherRule

@@ -2,11 +2,11 @@
 
 namespace Hanafalah\ModuleTransaction\Supports\Benefit;
 
+use Hanafalah\ModuleTransaction\Contracts\Supports\Benefit\Benefit as ContractBenefit;
 use Illuminate\Database\Eloquent\Model;
-use Hanafalah\ModuleTransaction\Contracts\Voucher\Condition as ConditionBenefit;
 use Hanafalah\ModuleTransaction\Supports\Condition\Condition;
 
-class Benefit extends Condition implements ConditionBenefit
+class Benefit extends Condition implements ContractBenefit
 {
     protected $__benefit_target;
     protected $__benefit_format;

@@ -3,7 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Supports\Condition;
 
 use Illuminate\Database\Eloquent\Model;
-use Hanafalah\ModuleTransaction\Contracts\Voucher\DateCondition as DateConditionInterface;
+use Hanafalah\ModuleTransaction\Contracts\Supports\Condition\DateCondition as DateConditionInterface;
 use Illuminate\Support\Str;
 
 class DateCondition extends Condition implements DateConditionInterface

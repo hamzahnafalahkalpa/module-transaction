@@ -3,7 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\SplitBill as ContractsSplitBill;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\SplitBill as ContractsSplitBill;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Hanafalah\ModuleTransaction\Resources\SplitBill\ViewSplitBill;

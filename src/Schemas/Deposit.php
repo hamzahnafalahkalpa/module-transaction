@@ -3,7 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\Deposit as ContractsDeposit;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\Deposit as ContractsDeposit;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 

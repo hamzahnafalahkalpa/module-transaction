@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Hanafalah\ModuleTransaction\Concerns\PaymentCalculation;
 use Hanafalah\ModuleTransaction\Concerns\PaymentHistoryMapper;
-use Hanafalah\ModuleTransaction\Contracts\PaymentHistory as ContractsPaymentHistory;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\PaymentHistory as ContractsPaymentHistory;
 use Hanafalah\ModuleTransaction\Data\PaymentHistoryDTO;
 use Hanafalah\ModuleTransaction\Schemas\PaymentSummary;
 

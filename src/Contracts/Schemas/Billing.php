@@ -1,12 +1,12 @@
 <?php
 
-namespace Hanafalah\ModuleTransaction\Contracts;
+namespace Hanafalah\ModuleTransaction\Contracts\Schemas;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Hanafalah\LaravelSupport\Contracts\DataManagement;
+use Hanafalah\LaravelSupport\Contracts\Supports\DataManagement;
 
 interface Billing extends DataManagement
 {

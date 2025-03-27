@@ -3,7 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\Refund as ContractsRefund;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\Refund as ContractsRefund;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

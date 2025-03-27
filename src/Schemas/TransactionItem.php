@@ -2,11 +2,11 @@
 
 namespace Hanafalah\ModuleTransaction\Schemas;
 
-use Hanafalah\ModuleTransaction\Contracts\TransactionItem as ContractsTransacitonItem;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\TransactionItem as ContractsTransacitonItem;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\PaymentDetail;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\PaymentDetail;
 use Hanafalah\ModuleTransaction\Resources\TransactionItem\{
     ViewTransactionItem,
     ShowTransactionItem

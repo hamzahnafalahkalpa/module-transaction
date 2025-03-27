@@ -4,7 +4,7 @@ namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Hanafalah\ModuleItem\Contracts\CardStock;
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\Consument as ContractsConsument;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\Consument as ContractsConsument;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;

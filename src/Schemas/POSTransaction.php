@@ -3,7 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Illuminate\Database\Eloquent\Model;
-use Hanafalah\ModuleTransaction\Contracts\POSTransaction as ContractsPOSTransaction;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\POSTransaction as ContractsPOSTransaction;
 
 class POSTransaction extends Transaction implements ContractsPOSTransaction
 {

@@ -2,7 +2,7 @@
 
 namespace Hanafalah\ModuleTransaction\Supports\Benefit;
 
-use Hanafalah\ModuleTransaction\Contracts\Voucher\Benefit\Billing as BillingInterface;
+use Hanafalah\ModuleTransaction\Contracts\Supports\Benefit\Billing as BillingInterface;
 
 class Billing extends Benefit implements BillingInterface
 {

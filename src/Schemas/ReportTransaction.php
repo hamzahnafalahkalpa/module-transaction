@@ -2,7 +2,7 @@
 
 namespace Hanafalah\ModuleTransaction\Schemas;
 
-use Hanafalah\ModuleTransaction\Contracts\ReportTransaction as ContractsReportTransaction;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\ReportTransaction as ContractsReportTransaction;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ReportTransaction extends Transaction implements ContractsReportTransaction

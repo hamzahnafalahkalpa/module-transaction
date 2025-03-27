@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\{
 use Illuminate\Support\Str;
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
 use Hanafalah\ModuleTransaction\Concerns\PaymentCalculation;
-use Hanafalah\ModuleTransaction\Contracts\Voucher as ContractsVoucher;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\Voucher as ContractsVoucher;
 use Hanafalah\ModuleTransaction\Enums\Voucher\Status;
 use Hanafalah\ModuleTransaction\Resources\Voucher\{ViewVoucher, ShowVoucher};
 

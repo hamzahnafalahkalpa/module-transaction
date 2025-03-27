@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\TariffComponent as ContractsTariffComponent;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\TariffComponent as ContractsTariffComponent;
 use Hanafalah\ModuleTransaction\Resources\TariffComponent\ShowTariffComponent;
 use Hanafalah\ModuleTransaction\Resources\TariffComponent\ViewTariffComponent;
 

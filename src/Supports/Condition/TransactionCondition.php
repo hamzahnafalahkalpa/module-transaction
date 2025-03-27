@@ -3,7 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Supports\Condition;
 
 use Illuminate\Database\Eloquent\Model;
-use Hanafalah\ModuleTransaction\Contracts\Voucher\TransactionCondition as TransactionConditionInterface;
+use Hanafalah\ModuleTransaction\Contracts\Supports\Condition\TransactionCondition as TransactionConditionInterface;
 use Illuminate\Support\Str;
 
 class TransactionCondition extends Condition implements TransactionConditionInterface

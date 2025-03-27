@@ -4,7 +4,7 @@ namespace Hanafalah\ModuleTransaction\Supports\Condition;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Hanafalah\ModuleTransaction\Contracts\Voucher\Condition as ConditionInterface;
+use Hanafalah\ModuleTransaction\Contracts\Supports\Condition\Condition as ConditionInterface;
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
 use Illuminate\Support\Str;
 use Hanafalah\ModuleTransaction\Concerns\PaymentCalculation;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hanafalah\ModuleTransaction\Contracts\Voucher\Benefit;
+namespace Hanafalah\ModuleTransaction\Contracts\Supports\Benefit;
 
 use Hanafalah\ModuleTransaction\Contracts\Voucher\Benefit;
 

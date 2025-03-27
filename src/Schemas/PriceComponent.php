@@ -3,7 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
-use Hanafalah\ModuleTransaction\Contracts\PriceComponent as ContractsPriceComponent;
+use Hanafalah\ModuleTransaction\Contracts\Schemas\PriceComponent as ContractsPriceComponent;
 use Hanafalah\ModuleTransaction\Resources\PriceComponent\{
     ViewPriceComponent,
     ShowPriceComponent

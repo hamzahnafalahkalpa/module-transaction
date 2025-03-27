@@ -13,11 +13,11 @@ class TransactionItem extends PackageManagement implements ContractsTransacitonI
     protected string $__entity = 'TransactionItem';
     public static $transaction_item_model;
 
-    public function viewUsingRelation(): array{
+    protected function viewUsingRelation(): array{
         return [];
     }
 
-    public function showUsingRelation(): array{
+    protected function showUsingRelation(): array{
         return [];
     }
 

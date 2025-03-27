@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
-use Hanafalah\ModulePharmacy\Enums\PharmacySale\Status;
 use Hanafalah\ModuleTransaction\Models\Consument\Consument;
 
 return new class extends Migration

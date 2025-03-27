@@ -19,8 +19,7 @@ class ShowTransactionItem extends ViewTransactionItem
             'id'              => $this->id,
             'item_name'       => $this->item_name,
             'item'            => $this->relationValidation('item', function () {
-                $item = $this->item;
-                return $item->toShowApi();
+                return $this->item->toShowApi();
             })
         ];
         $arr = $this->mergeArray(parent::toArray($request), $arr);

@@ -24,18 +24,8 @@ class ViewTransaction extends ApiResource
                 $reference = $this->reference;
                 return $reference->toViewApi();
             }),
-            // 'medic_service'     => $this->relationValidation('reference', function () {
-            //     $reference = $this->reference;
-            //     return $reference->relationValidation('visitRegistration', function () use ($reference) {
-            //         $visitRegistration = $reference->visitRegistration;
-            //         return [
-            //             'name'  => $visitRegistration->medic_service
-            //         ];
-            //     });
-            // }),
             'payment_summary' => $this->relationValidation('paymentSummary', function () {
                 return $this->paymentSummary->toViewApi();
-                // return new ShowPaymentSummary($this->paymentSummary);
             }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

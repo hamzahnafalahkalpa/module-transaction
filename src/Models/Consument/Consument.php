@@ -7,8 +7,7 @@ use Hanafalah\LaravelHasProps\Concerns\HasProps;
 use Hanafalah\LaravelSupport\Models\BaseModel;
 use Hanafalah\ModuleTransaction\Concerns\HasConsumentInvoice;
 use Hanafalah\ModuleTransaction\Resources\Consument\{
-    ViewConsument,
-    ShowConsument
+    ViewConsument, ShowConsument
 };
 
 class Consument extends BaseModel
@@ -38,18 +37,13 @@ class Consument extends BaseModel
         'name' => 'name'
     ];
 
-    public function toViewApi()
-    {
-        return new ViewConsument($this);
+    public function getViewResource(){
+        return ViewConsument::class;
     }
 
-    public function toShowApi()
-    {
-        return new ShowConsument($this);
+    public function getShowResource(){
+        return ShowConsument::class;
     }
 
-    public function reference()
-    {
-        return $this->morphTo();
-    }
+    public function reference(){return $this->morphTo();}
 }

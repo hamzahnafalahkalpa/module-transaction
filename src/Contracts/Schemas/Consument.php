@@ -10,8 +10,6 @@ use Hanafalah\LaravelSupport\Data\PaginateData;
 
 interface Consument extends DataManagement
 {
-    public function viewUsingRelation(): array;
-    public function showUsingRelation(): array;
     public function getConsument(): mixed;
     public function prepareStoreConsument(?array $attributes = null): Model;
     public function prepareShowConsument(?Model $model = null, ?array $attributes = null): Model;

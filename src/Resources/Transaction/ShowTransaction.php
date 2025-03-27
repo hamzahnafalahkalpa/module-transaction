@@ -17,9 +17,6 @@ class ShowTransaction extends ViewTransaction
      */
     public function toArray(\Illuminate\Http\Request $request): array
     {
-        // if (isset(request()->childs) && request()->childs) {
-        //     $this->load('childs');
-        // }
         $arr = [
             'reference'       => $this->relationValidation('reference', function () {
                 return  $this->reference->toShowApi();
@@ -29,14 +26,10 @@ class ShowTransaction extends ViewTransaction
                 return $this->reference->toShowApi();
             }),
             'payment_summary' => $this->relationValidation('paymentSummary', function () {
-                // $this->paymentSummary->load(['paymentDetails' => function($q) {
-                //     $q->whereNotNull("payment_history_id")->with("paymentHistory");
-                // }]);
-                //                return $this->paymentSummary->toShowApi();
-                return new ShowPaymentSummary($this->paymentSummary);
+                return $this->paymentSummary->toShowApi();
             }),
             'payment_history' => $this->relationValidation('paymentHistory', function () {
-                return new ShowPaymentSummary($this->paymentHistory);
+                return $this->paymentHistory->toShowApi();
             }),
             'billing'         => $this->relationValidation('billing', function () {
                 return $this->billing->toShowApi();

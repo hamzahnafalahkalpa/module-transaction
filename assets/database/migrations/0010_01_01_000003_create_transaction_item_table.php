@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Hanafalah\ModuleTransaction\Models\Transaction\TransactionItem;
-use Hanafalah\ModuleTransaction\Enums\Transaction\TransactionStatus;
+use Hanafalah\ModuleTransaction\Enums\Transaction\Status;
 use Hanafalah\ModuleTransaction\Models\Transaction\Transaction;
 
 return new class extends Migration
@@ -36,7 +36,7 @@ return new class extends Migration
                 $table->string('item_type', 50)->nullable(false);
                 $table->string('item_id', 36)->nullable(false);
                 $table->string('item_name', 255)->nullable();
-                $table->unsignedTinyInteger('status')->default(TransactionStatus::DRAFT->value)->nullable(false);
+                $table->unsignedTinyInteger('status')->default(Status::DRAFT->value)->nullable(false);
                 $table->json('props')->nullable();
                 $table->integer('total_tax')->nullable()->default(0);
                 $table->integer('total_additional')->nullable();

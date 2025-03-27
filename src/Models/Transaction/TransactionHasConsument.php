@@ -15,12 +15,6 @@ class TransactionHasConsument extends BaseModel
     protected $primaryKey = 'id';
     protected $keyType    = 'string';
 
-    public function transaction()
-    {
-        return $this->belongsToModel('Transaction');
-    }
-    public function consument()
-    {
-        return $this->belongsToModel('Consument');
-    }
+    public function transaction(){return $this->belongsToModel('Transaction');}
+    public function consument(){return $this->belongsToModel('Consument');}
 }

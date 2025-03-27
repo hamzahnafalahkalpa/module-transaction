@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Hanafalah\ModuleTransaction\{
     Models\Transaction\Transaction,
-    Enums\Transaction\TransactionStatus
+    Enums\Transaction\Status
 };
 use Hanafalah\ModuleTransaction\Models\Transaction\Invoice;
 
@@ -39,7 +39,7 @@ return new class extends Migration
                 $table->string('transaction_code', 100)->nullable(false);
                 $table->string('reference_type', 50)->nullable(false);
                 $table->string('reference_id', 36)->nullable(false);
-                $table->unsignedTinyInteger('status')->default(TransactionStatus::DRAFT->value)->nullable(false);
+                $table->unsignedTinyInteger('status')->default(Status::DRAFT->value)->nullable(false);
                 $table->foreignIdFor($user::class)->nullable()->index()
                     ->constrained()->cascadeOnUpdate()->restrictOnDelete();
                 $table->foreignIdFor($invoice::class)->nullable()->index()

@@ -32,29 +32,18 @@ class TransactionItem extends BaseModel
             }
         });
         static::deleted(function ($query) {
-            $query->paymentDetail->delete();
+            if ($this->PaymentDetailModel() !== null){
+                $query->paymentDetail->delete();
+            }
         });
     }
 
-    private static function isInArray(string $column, Model $model)
-    {
+    private static function isInArray(string $column, Model $model){
         return in_array($column, $model->getFillable());
     }
 
-    public function reference()
-    {
-        return $this->morphTo();
-    }
-    public function transaction()
-    {
-        return $this->belongsToModel('Transaction');
-    }
-    public function item()
-    {
-        return $this->morphTo();
-    }
-    public function paymentDetail()
-    {
-        return $this->hasOneModel('PaymentDetail');
-    }
+    public function reference(){return $this->morphTo();}
+    public function transaction(){return $this->belongsToModel('Transaction');}
+    public function item(){return $this->morphTo();}
+    public function paymentDetail(){return $this->hasOneModel('PaymentDetail');}
 }

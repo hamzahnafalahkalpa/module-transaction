@@ -17,20 +17,7 @@ class ModuleTransactionServiceProvider extends BaseServiceProvider
     {
         $this->registerMainClass(ModuleTransaction::class)
             ->registerCommandService(Providers\CommandServiceProvider::class)
-            ->registers([
-                '*',
-                'Services' => function () {
-                    $this->binds([
-                        Contracts\ModuleTransaction::class            => ModuleTransaction::class,
-                        Contracts\Voucher\Condition::class            => Supports\Condition\Condition::class,
-                        Contracts\Voucher\DateCondition::class        => Supports\Condition\DateCondition::class,
-                        Contracts\Voucher\UsageCondition::class       => Supports\Condition\UsageCondition::class,
-                        Contracts\Voucher\TransactionCondition::class => Supports\Condition\TransactionCondition::class,
-                        Contracts\Voucher\Benefit::class              => Supports\Benefit\Benefit::class,
-                        Contracts\Voucher\Benefit\Billing::class      => Supports\Benefit\Billing::class
-                    ]);
-                }
-            ]);
+            ->registers(['*']);
     }
 
     /**

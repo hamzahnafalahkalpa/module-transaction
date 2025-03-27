@@ -2,10 +2,11 @@
 
 namespace Hanafalah\ModuleTransaction\Contracts\Schemas;
 
+use Hanafalah\LaravelSupport\Data\PaginateData;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface ReportTransaction extends Transaction
 {
-    public function prepareTransactionReportPaginate(mixed $cache_reference_type = null, ?array $morphs = null, int $perPage = 10, array $columns = ['*'], string $pageName = 'page', ?int $page = null, ?int $total = null): LengthAwarePaginator;
-    public function viewTransactionReportPaginate(mixed $cache_reference_type = null, ?array $morphs = null, int $perPage = 10, array $columns = ['*'], string $pageName = 'page', ?int $page = null, ?int $total = null): array;
+    public function prepareViewTransactionReportPaginate(mixed $cache_reference_type = null, ?array $morphs = null, PaginateData $paginate_dto): LengthAwarePaginator;
+    public function viewTransactionReportPaginate(mixed $cache_reference_type = null, ?array $morphs = null, ? PaginateData $paginate_dto = null): array;
 }

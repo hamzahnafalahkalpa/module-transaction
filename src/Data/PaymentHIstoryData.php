@@ -4,7 +4,7 @@ namespace Hanafalah\ModuleTransaction\Data;
 
 use Hanafalah\LaravelSupport\Supports\Data;
 
-class PaymentHistoryDTO extends Data
+class PaymentHistoryData extends Data
 {
     public function __construct(
         public mixed $id,

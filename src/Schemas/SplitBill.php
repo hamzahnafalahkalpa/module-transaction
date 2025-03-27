@@ -13,13 +13,7 @@ class SplitBill extends PackageManagement implements ContractsSplitBill
     protected string $__entity = 'SplitBill';
     public static $split_bill_model;
 
-    protected array $__resources = [
-        'view' => ViewSplitBill::class,
-        'show' => ViewSplitBill::class,
-    ];
-
-    protected function showUsingRelation(): array
-    {
+    protected function showUsingRelation(): array{
         return [
             "paymentHistory.paymentHistoryDetails"
         ];

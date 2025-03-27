@@ -42,56 +42,26 @@ class Billing extends BaseModel
     {
         parent::booted();
         static::creating(function ($query) {
-            if (!isset($query->billing_code)) {
-                $query->billing_code = static::hasEncoding('BILLING');
-            }
-            if (!isset($query->uuid)) {
-                $query->uuid = Str::orderedUuid();
-            }
-            if (!isset($query->status)) $query->status = Status::DRAFT->value;
+            if (!isset($query->billing_code)) $query->billing_code = static::hasEncoding('BILLING');
+            if (!isset($query->uuid))         $query->uuid = Str::orderedUuid();
+            if (!isset($query->status))       $query->status = Status::DRAFT->value;
         });
     }
 
-    public function toShowApi()
-    {
-        return new ShowBilling($this);
+    public function getShowResource(){
+        return ShowBilling::class;
     }
 
-    public function toViewApi()
-    {
-        return new ViewBilling($this);
+    public function getViewBilling(){
+        return ViewBilling::class;
     }
 
-    public function reference()
-    {
-        return $this->morphTo();
-    }
-    public function paymentHistory()
-    {
-        return $this->morphOneModel('PaymentHistory', 'reference');
-    }
-    public function paymentHistories()
-    {
-        return $this->morphManyModel('PaymentHistory', 'reference');
-    }
-    public function cashier()
-    {
-        return $this->morphTo();
-    }
-    public function author()
-    {
-        return $this->morphTo();
-    }
-    public function hasTransaction()
-    {
-        return $this->belongsToModel("Transaction");
-    }
-    public function splitBill()
-    {
-        return $this->hasOneModel("SplitBill");
-    }
-    public function splitBills()
-    {
-        return $this->hasManyModel("SplitBill");
-    }
+    public function reference(){return $this->morphTo();}
+    public function paymentHistory(){return $this->morphOneModel('PaymentHistory', 'reference');}
+    public function paymentHistories(){return $this->morphManyModel('PaymentHistory', 'reference');}
+    public function cashier(){return $this->morphTo();}
+    public function author(){return $this->morphTo();}
+    public function hasTransaction(){return $this->belongsToModel("Transaction");}
+    public function splitBill(){return $this->hasOneModel("SplitBill");}
+    public function splitBills(){return $this->hasManyModel("SplitBill");}
 }

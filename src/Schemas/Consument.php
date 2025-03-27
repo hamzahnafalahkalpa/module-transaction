@@ -2,14 +2,12 @@
 
 namespace Hanafalah\ModuleTransaction\Schemas;
 
-use Hanafalah\ModuleItem\Contracts\CardStock;
+use Hanafalah\LaravelSupport\Data\PaginateData;
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
 use Hanafalah\ModuleTransaction\Contracts\Schemas\Consument as ContractsConsument;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Hanafalah\ModuleTransaction\Resources\Consument\ShowConsument;
-use Hanafalah\ModuleTransaction\Resources\Consument\ViewConsument;
 
 class Consument extends PackageManagement implements ContractsConsument
 {
@@ -17,11 +15,6 @@ class Consument extends PackageManagement implements ContractsConsument
     protected array $__add        = [];
     protected string $__entity    = 'Consument';
     public static $consument_model;
-
-    protected array $__resources = [
-        'view' => ViewConsument::class,
-        'show' => ShowConsument::class
-    ];
 
     protected array $__cache = [
         'show' => [
@@ -31,23 +24,26 @@ class Consument extends PackageManagement implements ContractsConsument
         ]
     ];
 
-    public function prepareStoreConsument(?array $attributes = null): Model
-    {
+    public function viewUsingRelation(): array{
+        return [];
+    }
+
+    public function showUsingRelation(): array{
+        return ['reference'];
+    }
+
+    public function getConsument(): mixed{
+        return static::$consument_model;
+    }
+
+    public function prepareStoreConsument(?array $attributes = null): Model{
         $attributes ??= request()->all();
 
         $consument = $this->consument()->updateOrCreate([], []);
         return static::$consument_model = $consument;
     }
 
-    public function showUsingRelation(): array
-    {
-        return [
-            'reference'
-        ];
-    }
-
-    public function prepareShowConsument(?Model $model = null, ?array $attributes = null): Model
-    {
+    public function prepareShowConsument(?Model $model = null, ?array $attributes = null): Model{
         $attributes ??= request()->all();
 
         $model ??= $this->getConsument();
@@ -62,36 +58,27 @@ class Consument extends PackageManagement implements ContractsConsument
         return static::$consument_model = $model;
     }
 
-    public function showConsument(?Model $model = null)
-    {
-        return $this->transforming($this->__resources['show'], function () use ($model) {
+    public function showConsument(?Model $model = null): array{
+        return $this->showEntityResource(function() use ($model){
             return $this->prepareShowConsument($model);
         });
     }
 
-    public function prepareViewConsumentPaginate(int $perPage = 50, array $columns = ['*'], string $pageName = 'page', ?int $page = null, ?int $total = null): LengthAwarePaginator
-    {
-        $attributes ??= request()->all();
-
-        $paginate_options = compact('perPage', 'columns', 'pageName', 'page', 'total');
-
+    public function prepareViewConsumentPaginate(PaginateData $paginate_dto): LengthAwarePaginator{
         $consument_model = $this->consument()->orderBy('created_at', 'desc')
-            ->paginate(...$this->arrayValues($paginate_options))
+            ->paginate(...$paginate_dto->toArray())
             ->appends(request()->all());
 
         return static::$consument_model = $consument_model;
     }
 
-    public function viewConsumentPaginate(int $perPage = 50, array $columns = ['*'], string $pageName = 'page', ?int $page = null, ?int $total = null): array
-    {
-        $paginate_options = compact('perPage', 'columns', 'pageName', 'page', 'total');
-        return $this->transforming($this->__resources['view'], function () use ($paginate_options) {
-            return $this->prepareViewConsumentPaginate(...$this->arrayValues($paginate_options));
+    public function viewConsumentPaginate(?PaginateData $paginate_dto = null): array{
+        return $this->viewEntityResource(function() use ($paginate_dto){
+            return $this->prepareViewConsumentPaginate($paginate_dto ?? PaginateData::from(request()->all()));
         });
     }
 
-    public function prepareDeleteConsument(?array $attributes = null): bool
-    {
+    public function prepareDeleteConsument(?array $attributes = null): bool{
         $attributes ??= request()->all();
         if (!isset($attributes['id'])) throw new \Exception('Consument not found.', 422);
 
@@ -99,26 +86,14 @@ class Consument extends PackageManagement implements ContractsConsument
         return $consument->delete();
     }
 
-    public function deleteConsument(): bool
-    {
+    public function deleteConsument(): bool{
         return $this->transaction(function () {
             return $this->prepareDeleteConsument();
         });
     }
 
-    public function consument(mixed $conditionals = null): Builder
-    {
+    public function consument(mixed $conditionals = null): Builder{
         $this->booting();
-        return $this->ConsumentModel()->conditionals($conditionals)
-            ->when(isset(request()->consument_id), function ($query) {
-                $query->where('consument_id', request()->consument_id);
-            })->when(isset(request()->consument_type), function ($query) {
-                $query->where('consument_type', request()->consument_type);
-            })->withParameters();
-    }
-
-    public function getConsument(): mixed
-    {
-        return static::$consument_model;
+        return $this->ConsumentModel()->conditionals($this->mergeCondition($conditionals))->withParameters()->orderBy('name','asc');
     }
 }

@@ -4,6 +4,7 @@ namespace Hanafalah\ModuleTransaction\Concerns;
 
 trait HasPaymentSummary
 {
+    use HasTransaction;
 
     public static function bootHasPaymentSummary()
     {

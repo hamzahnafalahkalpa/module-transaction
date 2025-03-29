@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Hanafalah\LaravelSupport\Contracts\Supports\DataManagement;
-use Hanafalah\LaravelSupport\Data\PaginateData;
+use Hanafalah\LaravelSupport\Contracts\Data\PaginateData;
 
 interface Consument extends DataManagement
 {

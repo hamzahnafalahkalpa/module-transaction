@@ -5,7 +5,7 @@ namespace Hanafalah\ModuleTransaction\Contracts\Schemas;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Hanafalah\LaravelSupport\Contracts\Supports\DataManagement;
-use Hanafalah\LaravelSupport\Data\PaginateData;
+use Hanafalah\LaravelSupport\Contracts\Data\PaginateData;
 use Hanafalah\ModuleTransaction\Data\TransactionItemData;
 
 interface Transaction extends DataManagement

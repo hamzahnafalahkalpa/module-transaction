@@ -2,7 +2,7 @@
 
 namespace Hanafalah\ModuleTransaction\Schemas;
 
-use Hanafalah\LaravelSupport\Data\PaginateData;
+use Hanafalah\LaravelSupport\Contracts\Data\PaginateData;
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
 use Hanafalah\ModuleTransaction\Contracts\Schemas\Transaction as ContractsTransaction;
 use Hanafalah\ModuleTransaction\Data\TransactionItemData;

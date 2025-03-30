@@ -23,7 +23,6 @@ class ShowTransactionItem extends ViewTransactionItem
             })
         ];
         $arr = $this->mergeArray(parent::toArray($request), $arr);
-
         return $arr;
     }
 }

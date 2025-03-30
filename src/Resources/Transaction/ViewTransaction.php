@@ -21,20 +21,11 @@ class ViewTransaction extends ApiResource
             'transaction_code'  => $this->transaction_code,
             'reference_type'    => $this->reference_type,
             'reference'         => $this->relationValidation('reference', function () {
-                $reference = $this->reference;
-                return $reference->toViewApi();
-            }),
-            'payment_summary' => $this->relationValidation('paymentSummary', function () {
-                return $this->paymentSummary->toViewApi();
+                return $this->reference->toViewApi();
             }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
-        $props = $this->getPropsData() ?? [];
-        foreach ($props as $key => $prop) {
-            $arr[$key] = $prop;
-        }
-
         return $arr;
     }
 }

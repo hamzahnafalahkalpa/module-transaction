@@ -45,5 +45,4 @@ class TransactionItem extends BaseModel
     public function reference(){return $this->morphTo();}
     public function transaction(){return $this->belongsToModel('Transaction');}
     public function item(){return $this->morphTo();}
-    public function paymentDetail(){return $this->hasOneModel('PaymentDetail');}
 }

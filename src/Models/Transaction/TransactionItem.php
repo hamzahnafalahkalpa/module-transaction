@@ -23,12 +23,14 @@ class TransactionItem extends BaseModel
         parent::booted();
         static::created(function ($query) {
             $item = $query->item;
-            if (
-                static::isInArray('is_settled', $item) ||
-                static::isInArray('props', $item)
-            ) {
-                $item->is_settled = false;
-                $item->save();
+            if (isset($item)){
+                if (
+                    static::isInArray('is_settled', $item) ||
+                    static::isInArray('props', $item)
+                ) {
+                    $item->is_settled = false;
+                    $item->save();
+                }
             }
         });
         static::deleted(function ($query) {
@@ -45,5 +47,4 @@ class TransactionItem extends BaseModel
     public function reference(){return $this->morphTo();}
     public function transaction(){return $this->belongsToModel('Transaction');}
     public function item(){return $this->morphTo();}
-    public function paymentDetail(){return $this->hasOneModel('PaymentDetail');}
 }

@@ -18,21 +18,8 @@ class ShowTransaction extends ViewTransaction
     public function toArray(\Illuminate\Http\Request $request): array
     {
         $arr = [
-            'reference'       => $this->relationValidation('reference', function () {
+            'reference' => $this->relationValidation('reference', function () {
                 return  $this->reference->toShowApi();
-            }),
-            'visit_patient'   => $this->relationValidation('reference', function () {
-                $this->reference->load(["services", "transaction"]);
-                return $this->reference->toShowApi();
-            }),
-            'payment_summary' => $this->relationValidation('paymentSummary', function () {
-                return $this->paymentSummary->toShowApi();
-            }),
-            'payment_history' => $this->relationValidation('paymentHistory', function () {
-                return $this->paymentHistory->toShowApi();
-            }),
-            'billing'         => $this->relationValidation('billing', function () {
-                return $this->billing->toShowApi();
             })
         ];
         $arr = $this->mergeArray(parent::toArray($request), $arr);

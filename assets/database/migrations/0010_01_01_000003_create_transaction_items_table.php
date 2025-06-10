@@ -32,18 +32,17 @@ return new class extends Migration
 
                 $table->ulid('id')->primary();
                 $table->foreignIdFor($transaction::class)->nullable()->index()
-                    ->constrained()->cascadeOnUpdate()->restrictOnDelete();
+                      ->constrained()->cascadeOnUpdate()->restrictOnDelete();
                 $table->string('item_type', 50)->nullable(false);
                 $table->string('item_id', 36)->nullable(false);
                 $table->string('item_name', 255)->nullable();
-                $table->unsignedTinyInteger('status')->default(Status::DRAFT->value)->nullable(false);
+                $table->unsignedBigInteger('tax')->nullable()->default(0);
+                $table->unsignedBigInteger('additional')->nullable();
                 $table->json('props')->nullable();
-                $table->integer('total_tax')->nullable()->default(0);
-                $table->integer('total_additional')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
 
-                $table->index(['item_type', 'item_id'], 'item_ref');
+                $table->index(['item_type', 'item_id'], 'ti_item_ref');
             });
 
             Schema::table($table_name, function (Blueprint $table) {

@@ -25,12 +25,22 @@ class Transaction extends BaseModel
         'reference_type',
         'reference_id',
         'status',
-        'created_at',
         'reported_at',
         'canceled_at'
     ];
     protected $show       = ['parent_id', 'props'];
     protected $primaryKey = 'id';
+    protected $casts = [
+        'reported_at' => 'datetime',
+        'canceled_at' => 'datetime',
+        'name'        => 'string'
+    ];
+
+    public function getPropsQuery(): array{
+        return [
+            'name' => 'props->prop_reference->name'
+        ];
+    }
 
     protected static function booted(): void{
         parent::booted();

@@ -24,5 +24,5 @@ return [
 
         ]
     ],
-    'author' => \App\Models\User::class
+    'author' => 'User'
 ];

@@ -52,6 +52,14 @@ class Transaction extends BaseModel
         });
     }
 
+    public function viewUsingRelation(): array{
+        return [];
+    }
+
+    public function showUsingRelation(): array{
+        return ['reference'];
+    }
+
     public function getViewResource(){
         return ViewTransaction::class;
     }

@@ -69,4 +69,17 @@ class Transaction extends BaseModel
     }
 
     public function reference(){return $this->morphTo();}    
+    public function transactionHasConsument(){return $this->hasOneModel('TransactionHasConsument');}
+    public function consument(){
+        $consument_model = $this->ConsumentModel();
+        $transaction_consument = $this->TransactionHasConsumentModel();
+        return $this->hasOneThroughModel(
+            'Consument',
+            'TransactionHasConsument',
+            $this->getForeignKey(),
+            $consument_model->getKeyName(),
+            $this->getKeyName(),
+            $consument_model->getForeignKey()
+        )->select($transaction_consument->getTable().'.*',$consument_model->getTable().'.*', $consument_model->getTable().'.id as id');
+    }
 }

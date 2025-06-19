@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @see \Hanafalah\ModuleTransaction\Schemas\TransactionItem
+ * @method self setParamLogic(string $logic, bool $search_value = false, ?array $optionals = [])
  * @method self conditionals(mixed $conditionals)
  * @method array updateTransactionItem(?TransactionItemData $transaction_item_dto = null)
  * @method Model prepareUpdateTransactionItem(TransactionItemData $transaction_item_dto)

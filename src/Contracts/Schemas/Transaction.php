@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @see \Hanafalah\ModuleTransaction\Schemas\Transaction
+ * @method self setParamLogic(string $logic, bool $search_value = false, ?array $optionals = [])
  * @method self conditionals(mixed $conditionals)
  * @method mixed export(string $type)
  * @method array updateTransaction(?TransactionData $transaction_dto = null)

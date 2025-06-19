@@ -4,10 +4,11 @@ namespace Hanafalah\ModuleTransaction\Data;
 
 use Hanafalah\LaravelSupport\Supports\Data;
 use Hanafalah\ModulePayment\Contracts\Data\PaymentDetailData;
+use Hanafalah\ModuleTransaction\Contracts\Data\TransactionItemData as DataTransactionItemData;
 use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Attributes\MapName;
 
-class TransactionItemData extends Data{
+class TransactionItemData extends Data implements DataTransactionItemData{
     #[MapInputName('id')]
     #[MapName('id')]
     public mixed $id = null;

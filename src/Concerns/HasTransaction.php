@@ -19,17 +19,16 @@ trait HasTransaction
             if (
                 method_exists($query, 'isHasJournalEntry') && 
                 $query->isHasJournalEntry() &&
-                $query->isDirty('reported_at') &&
-                isset($query->reported_at)
+                $query->isReported()
             ){
                 $transaction = $query->transaction;
-                $reference = app(config('database.models.'.$transaction->reference_type))->find($transaction->reference_id);
+                $reference   = app(config('database.models.'.$transaction->reference_type))->find($transaction->reference_id);
 
                 app(config('app.contracts.JournalEntry'))->prepareStoreJournalEntry(
                     HasRequestData::newStatic()->requestDTO(JournalEntryData::class,[
                         'transaction_id' => $transaction->getKey(),
                         'reference_type' => $transaction->reference_type,
-                        'reference_id'   => $transaction->reference_id,
+                        'reference_id'   => $transaction->reference_id, 
                         'name'           => $reference->name ?? null
                     ])
                 );

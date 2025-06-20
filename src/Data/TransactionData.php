@@ -3,6 +3,7 @@
 namespace Hanafalah\ModuleTransaction\Data;
 
 use Hanafalah\LaravelSupport\Supports\Data;
+use Hanafalah\ModulePayment\Contracts\Data\ConsumentData;
 use Hanafalah\ModulePayment\Contracts\Data\PaymentDetailData;
 use Hanafalah\ModuleTransaction\Contracts\Data\TransactionData as DataTransactionData;
 use Spatie\LaravelData\Attributes\MapInputName;

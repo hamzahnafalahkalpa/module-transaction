@@ -43,6 +43,7 @@ return new class extends Migration
                 $table->json('props')->nullable();
                 $table->timestamp('reported_at')->nullable();
                 $table->timestamp('canceled_at')->nullable();
+                $table->timestamp('journal_reported_at')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
 

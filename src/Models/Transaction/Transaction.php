@@ -58,6 +58,7 @@ class Transaction extends BaseModel
                 $query->isJournalReported()
             ){
                 $reference = app(config('database.models.'.$query->reference_type))->find($query->reference_id);
+
                 app(config('app.contracts.JournalEntry'))->prepareStoreJournalEntry(
                     $query->requestDTO(config('app.contracts.JournalEntryData'),[
                         'transaction_reference_id' => $query->getKey(),

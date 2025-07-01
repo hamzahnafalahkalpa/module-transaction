@@ -10,7 +10,8 @@ trait HasTransaction
             $query->with('transaction');
         });
         static::created(function ($query) {
-            $query->transaction()->firstOrCreate();
+            $transaction = $query->transaction()->firstOrCreate();
+            $query->prop_transaction = $transaction->toViewApi()->resolve();
         });
     }
 

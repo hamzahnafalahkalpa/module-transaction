@@ -21,7 +21,7 @@ class ViewTransaction extends ApiResource
             'transaction_code'  => $this->transaction_code,
             'reference_type'    => $this->reference_type,
             'reference'         => $this->relationValidation('reference', function () {
-                return $this->reference->toViewApi();
+                return $this->reference->toViewApi()->resolve();
             }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

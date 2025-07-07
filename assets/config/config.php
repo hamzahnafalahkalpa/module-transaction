@@ -9,7 +9,7 @@ return [
             //ADD YOUR CONTRACTS HERE
         ],
     ],
-    'libs' => [
+    'libs'       => [
         'model' => 'Models',
         'contract' => 'Contracts',
         'schema' => 'Schemas',
@@ -26,5 +26,5 @@ return [
     'commands' => [
         ModuleTransactionCommands\InstallMakeCommand::class
     ],
-    'author' => \App\Models\User::class
+    'author' => 'User'
 ];

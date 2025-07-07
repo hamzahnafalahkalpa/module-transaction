@@ -6,18 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Hanafalah\LaravelSupport\Contracts\Supports\DataManagement;
 use Hanafalah\LaravelSupport\Contracts\Data\PaginateData;
-use Hanafalah\ModuleTransaction\Data\TransactionItemData;
+use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @see \Hanafalah\ModuleTransaction\Schemas\Transaction
+ * @method self setParamLogic(string $logic, bool $search_value = false, ?array $optionals = [])
+ * @method self conditionals(mixed $conditionals)
+ * @method mixed export(string $type)
+ * @method array updateTransaction(?TransactionData $transaction_dto = null)
+ * @method Model prepareUpdateTransaction(TransactionData $transaction_dto)
+ * @method bool deleteTransaction()
+ * @method bool prepareDeleteTransaction(? array $attributes = null)
+ * @method mixed getTransaction()
+ * @method ?Model prepareShowTransaction(?Model $model = null, ?array $attributes = null)
+ * @method array showTransaction(?Model $model = null)
+ * @method Collection prepareViewTransactionList()
+ * @method array viewTransactionList()
+ * @method LengthAwarePaginator prepareViewTransactionPaginate(PaginateData $paginate_dto)
+ * @method array viewTransactionPaginate(?PaginateData $paginate_dto = null)
+ * @method array storeTransaction(?TransactionData $transaction_dto = null);
+ */
 interface Transaction extends DataManagement
 {
-    public function getTransaction(): mixed;
-    public function initializeTransaction(Model $transaction): void;
-    public function prepareStoreTransactionItem(TransactionItemData $transaction_item_dto): Model;
-    public function storeTransactionItem(? TransactionItemData $transaction_item_dto = null): array;
-    public function getTransactionStatus(): array;
-    public function prepareViewTransactionPaginate(mixed $cache_reference_type = null, ?array $morphs = null, PaginateData $paginate_dto): LengthAwarePaginator;
-    public function viewTransactionPaginate(mixed $cache_reference_type = null, ?array $morphs = null, ? PaginateData $paginate_dto): array;
-    public function prepareShowTransaction(?Model $model = null, ? array $attributes = null): ?Model;
-    public function showTransaction(?Model $model = null): array;
-    
+    public function trx(mixed $conditionals = null): Builder;
 }

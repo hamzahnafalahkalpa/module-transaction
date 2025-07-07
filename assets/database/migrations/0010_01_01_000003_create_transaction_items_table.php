@@ -42,7 +42,7 @@ return new class extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
-                $table->index(['item_type', 'item_id'], 'item_ref');
+                $table->index(['item_type', 'item_id'], 'ti_item_ref');
             });
 
             Schema::table($table_name, function (Blueprint $table) {

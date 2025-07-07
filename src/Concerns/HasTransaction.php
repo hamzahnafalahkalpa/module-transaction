@@ -10,24 +10,28 @@ trait HasTransaction
             $query->with('transaction');
         });
         static::created(function ($query) {
-            $query->transaction()->firstOrCreate();
+            $transaction = $query->transaction()->firstOrCreate();
+            $query->prop_transaction = $transaction->toViewApi()->resolve();
         });
     }
 
-    public function transaction()
-    {
+    public function transaction(){
         return $this->morphOneModel('Transaction', 'reference');
     }
 
-    public function reporting()
-    {
+    public function reporting(){
         $transaction = $this->transaction()->firstOrCreate();
         $transaction->reported_at = now();
         $transaction->save();
     }
 
-    public function canceling()
-    {
+    public function journalReporting(){
+        $transaction = $this->transaction()->firstOrCreate();
+        $transaction->journal_reported_at = now();
+        $transaction->save();
+    }
+
+    public function canceling(){
         $transaction = $this->transaction()->firstOrCreate();
         $transaction->canceled_at = now();
         $transaction->save();

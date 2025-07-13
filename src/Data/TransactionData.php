@@ -15,6 +15,10 @@ class TransactionData extends Data implements DataTransactionData{
     #[MapName('id')]
     public mixed $id = null;
 
+    #[MapInputName('parent_id')]
+    #[MapName('parent_id')]
+    public mixed $parent_id = null;
+
     #[MapInputName('reference_type')]
     #[MapName('reference_type')]
     public ?string $reference_type = null;
@@ -22,6 +26,10 @@ class TransactionData extends Data implements DataTransactionData{
     #[MapInputName('reference_id')]
     #[MapName('reference_id')]
     public mixed $reference_id = null;
+
+    #[MapInputName('reference_model')]
+    #[MapName('reference_model')]
+    public ?object $reference_model = null;
 
     #[MapInputName('consument')]
     #[MapName('consument')]
@@ -38,4 +46,8 @@ class TransactionData extends Data implements DataTransactionData{
     #[MapInputName('payment_detail')]
     #[MapName('payment_detail')]
     public ?PaymentDetailData $payment_detail = null;
+
+    #[MapInputName('props')]
+    #[MapName('props')]
+    public ?array $props = null;
 }

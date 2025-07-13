@@ -3,8 +3,11 @@
 use Hanafalah\ModuleTransaction\Commands as ModuleTransactionCommands;
 
 return [
-    'commands' => [
-        ModuleTransactionCommands\InstallMakeCommand::class
+    'namespace' => 'Hanafalah\\ModuleTransaction',
+    'app' => [
+        'contracts' => [
+            //ADD YOUR CONTRACTS HERE
+        ],
     ],
     'libs'       => [
         'model' => 'Models',
@@ -15,14 +18,13 @@ return [
         'resource' => 'Resources',
         'migration' => '../assets/database/migrations'
     ],
-    'app' => [
-        'contracts'  => [
-        ],
-    ],
     'database'   => [
         'models' => [
 
         ]
+    ],
+    'commands' => [
+        ModuleTransactionCommands\InstallMakeCommand::class
     ],
     'author' => 'User'
 ];

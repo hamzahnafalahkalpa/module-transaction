@@ -11,7 +11,7 @@ use Hanafalah\ModuleTransaction\Data\TransactionItemData;
 class TransactionItem extends PackageManagement implements ContractsTransacitonItem
 {
     protected string $__entity = 'TransactionItem';
-    public static $transaction_item_model;
+    public $transaction_item_model;
 
     public function prepareStoreTransactionItem(TransactionItemData $transaction_item_dto): Model{
         if (isset($transaction_item_dto->id)) {
@@ -34,7 +34,7 @@ class TransactionItem extends PackageManagement implements ContractsTransacitonI
             $this->schemaContract('payment_detail')
                  ->prepareStorePaymentDetail($transaction_item_dto->payment_detail);
         }
-        return static::$transaction_item_model = $transaction_item;
+        return $this->transaction_item_model = $transaction_item;
     }
 
     public function camelEntity(): string{

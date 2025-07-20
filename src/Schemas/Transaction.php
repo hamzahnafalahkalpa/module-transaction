@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends PackageManagement implements ContractsTransaction
 {
     protected string $__entity = 'Transaction';
-    public static $transaction_model;
+    public $transaction_model;
 
     protected array $__cache = [
         'index' => [
@@ -41,7 +41,7 @@ class Transaction extends PackageManagement implements ContractsTransaction
         $transaction = $this->usingEntity()->firstOrCreate($guard,$add);
         $this->fillingProps($transaction, $transaction_dto->props);
         $transaction->save();
-        return static::$transaction_model = $transaction;
+        return $this->transaction_model = $transaction;
     }
 
     public function camelEntity(): string{

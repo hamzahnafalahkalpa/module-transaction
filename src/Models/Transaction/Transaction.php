@@ -51,8 +51,10 @@ class Transaction extends BaseModel
             $query->status ??= self::getTransactionStatus(Status::ACTIVE->value);
         });
         static::updated(function($query){
+            $query->load('reference');
             $reference = $query->reference;
             if (
+                isset($reference) &&
                 method_exists($reference, 'isHasJournalEntry') &&
                 $reference->isHasJournalEntry() &&
                 $query->isJournalReported()
@@ -87,15 +89,9 @@ class Transaction extends BaseModel
         return ['reference'];
     }
 
-    public function getViewResource(){
-        return ViewTransaction::class;
-    }
-
-    public function getShowResource(){
-        return ShowTransaction::class;
-    }
-
-    public function reference(){return $this->morphTo();}    
+    public function getViewResource(){return ViewTransaction::class;}
+    public function getShowResource(){return ShowTransaction::class;}
+    public function reference(){return $this->morphTo()->withoutGlobalScopes();}    
     public function transactionHasConsument(){return $this->hasOneModel('TransactionHasConsument');}
     public function consument(){
         $consument_model = $this->ConsumentModel();

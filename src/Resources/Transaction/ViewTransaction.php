@@ -19,6 +19,7 @@ class ViewTransaction extends ApiResource
             'id'                => $this->id,
             'uuid'              => $this->uuid,
             'transaction_code'  => $this->transaction_code,
+            'consument'         => $this->prop_consument,
             'reference_type'    => $this->reference_type,
             'reference'         => $this->relationValidation('reference', function () {
                 return $this->reference->toViewApi()->resolve();

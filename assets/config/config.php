@@ -26,5 +26,7 @@ return [
     'commands' => [
         ModuleTransactionCommands\InstallMakeCommand::class
     ],
-    'author' => 'User'
+    'author' => 'User',
+    'payment_detail' => null,
+    'consument' => null
 ];

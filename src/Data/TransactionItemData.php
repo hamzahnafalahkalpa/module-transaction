@@ -2,13 +2,15 @@
 
 namespace Hanafalah\ModuleTransaction\Data;
 
+use Hanafalah\LaravelSupport\Concerns\Support\HasRequestData;
 use Hanafalah\LaravelSupport\Supports\Data;
-use Hanafalah\ModulePayment\Contracts\Data\PaymentDetailData;
 use Hanafalah\ModuleTransaction\Contracts\Data\TransactionItemData as DataTransactionItemData;
 use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Attributes\MapName;
 
 class TransactionItemData extends Data implements DataTransactionItemData{
+    use HasRequestData;
+
     #[MapInputName('id')]
     #[MapName('id')]
     public mixed $id = null;
@@ -19,7 +21,7 @@ class TransactionItemData extends Data implements DataTransactionItemData{
     
     #[MapInputName('transaction_id')]
     #[MapName('transaction_id')]
-    public string $transaction_id;
+    public mixed $transaction_id = null;
     
     #[MapInputName('item_type')]
     #[MapName('item_type')]
@@ -35,5 +37,23 @@ class TransactionItemData extends Data implements DataTransactionItemData{
 
     #[MapInputName('payment_detail')]
     #[MapName('payment_detail')]
-    public ?PaymentDetailData $payment_detail = null;
+    public array|object|null $payment_detail = null;
+
+    public static function after(self $data):self{
+        $new = static::new();
+        
+        if (is_array($data->payment_detail)){
+            $payment_detail_name = config('module-transaction.payment_detail');
+            if (isset($payment_detail_name)){
+                $data->payment_detail = $new->requestDTO(
+                    config('app.contracts.'.$payment_detail_name.'Data'),
+                    $data->payment_detail
+                );
+            }else{
+                $data->payment_detail = null;
+            }
+        }
+        return $data;
+    }
+
 }

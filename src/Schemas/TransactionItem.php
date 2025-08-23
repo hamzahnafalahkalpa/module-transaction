@@ -28,11 +28,11 @@ class TransactionItem extends PackageManagement implements ContractsTransacitonI
         $transaction_item = $this->TransactionItemModel()->updateOrCreate($guard, [
             'item_name' => $transaction_item_dto->item_name
         ]);
-        if (isset($transaction_item_dto->payment_detail)) {
-            if ($this->PaymentDetailModel() == null) throw new \Exception('You need to install module-payment', 422);
-
+        if (isset($transaction_item_dto->payment_detail) && config('module-transaction.payment_detail') !== null) {
+            $payment_detail = &$transaction_item_dto->payment_detail;
+            $payment_detail->transaction_item_id = $transaction_item->getKey();
             $this->schemaContract('payment_detail')
-                 ->prepareStorePaymentDetail($transaction_item_dto->payment_detail);
+                 ->prepareStorePaymentDetail($payment_detail);
         }
         return $this->transaction_item_model = $transaction_item;
     }

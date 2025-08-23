@@ -32,6 +32,8 @@ class Transaction extends BaseModel
     protected $show       = ['parent_id', 'props'];
     protected $primaryKey = 'id';
     protected $casts = [
+        'reference_type' => 'string',
+        'reference_id' => 'string',
         'journal_reported_at' => 'datetime',
         'reported_at' => 'datetime',
         'canceled_at' => 'datetime',

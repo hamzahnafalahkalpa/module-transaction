@@ -2,10 +2,6 @@
 
 namespace Hanafalah\ModuleTransaction\Resources\Transaction;
 
-use Hanafalah\LaravelSupport\Resources\ApiResource;
-use Hanafalah\ModuleTransaction\Resources\PaymentDetail\ShowPaymentDetail;
-use Hanafalah\ModuleTransaction\Resources\PaymentSummary\ShowPaymentSummary;
-
 class ShowTransaction extends ViewTransaction
 {
 

@@ -30,16 +30,12 @@ return new class extends Migration
         $table_name = $this->__table->getTable();
         if (!$this->isTableExists()) {
             Schema::create($table_name, function (Blueprint $table) {
-                $user = app(config('database.models.User', User::class));
-
                 $table->ulid('id')->primary();
                 $table->string('uuid', 36)->nullable(false);
                 $table->string('transaction_code', 100)->nullable(false);
                 $table->string('reference_type', 50)->nullable(false);
                 $table->string('reference_id', 36)->nullable(false);
                 $table->enum('status',array_column(Status::cases(), 'value'))->default(Status::DRAFT->value)->nullable(false);
-                $table->foreignIdFor($user::class)->nullable()->index()
-                    ->constrained()->cascadeOnUpdate()->restrictOnDelete();
                 $table->json('props')->nullable();
                 $table->timestamp('reported_at')->nullable();
                 $table->timestamp('canceled_at')->nullable();

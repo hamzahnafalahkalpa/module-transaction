@@ -4,7 +4,7 @@ namespace Hanafalah\ModuleTransaction\Contracts\Schemas;
 
 use Illuminate\Database\Eloquent\Model;
 use Hanafalah\LaravelSupport\Contracts\Supports\DataManagement;
-use Hanafalah\ModuleTransaction\Data\TransactionItemData;
+use Hanafalah\ModuleTransaction\Contracts\Data\TransactionItemData;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -27,6 +27,4 @@ use Illuminate\Database\Eloquent\Builder;
 interface TransactionItem extends DataManagement
 {
     public function prepareStoreTransactionItem(TransactionItemData $transaction_item_dto): Model;
-    public function camelEntity(): string;
-    public function trxItem(mixed $conditionals = null): Builder;
 }

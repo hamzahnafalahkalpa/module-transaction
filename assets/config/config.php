@@ -26,7 +26,14 @@ return [
     'commands' => [
         ModuleTransactionCommands\InstallMakeCommand::class
     ],
+    'transaction_types'=> [
+        //THIS KEY SAME WITH MODEL NAME USING SNAKE CASE
+        'submission' => [
+            'schema' => 'Submission',
+        ]
+    ],
     'author' => 'User',
+    'payment_summary' => null,
     'payment_detail' => null,
     'consument' => null
 ];

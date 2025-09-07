@@ -31,18 +31,18 @@ return new class extends Migration
                 $transaction = app(config('database.models.Transaction', Transaction::class));
 
                 $table->ulid('id')->primary();
-                $table->foreignIdFor($transaction::class)->nullable()->index()
-                      ->constrained()->cascadeOnUpdate()->restrictOnDelete();
+                $table->foreignIdFor($transaction::class)->nullable()->index();
+                $table->string('name', 255)->nullable(false);
+                $table->string('reference_type', 50)->nullable(false);
+                $table->string('reference_id', 36)->nullable(false);
                 $table->string('item_type', 50)->nullable(false);
                 $table->string('item_id', 36)->nullable(false);
-                $table->string('item_name', 255)->nullable();
-                $table->unsignedBigInteger('tax')->nullable()->default(0);
-                $table->unsignedBigInteger('additional')->nullable();
                 $table->json('props')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
 
-                $table->index(['item_type', 'item_id'], 'ti_item_ref');
+                $table->index(['item_type', 'item_id'], 'trxi_item_ref');
+                $table->index(['reference_type', 'reference_id'], 'trxi_ref');
             });
 
             Schema::table($table_name, function (Blueprint $table) {

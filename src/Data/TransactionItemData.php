@@ -23,6 +23,18 @@ class TransactionItemData extends Data implements DataTransactionItemData{
     #[MapName('transaction_id')]
     public mixed $transaction_id = null;
     
+    #[MapInputName('reference_type')]
+    #[MapName('reference_type')]
+    public ?string $reference_type = null;
+
+    #[MapInputName('reference_id')]
+    #[MapName('reference_id')]
+    public mixed $reference_id = null;
+
+    #[MapInputName('reference_model')]
+    #[MapName('reference_model')]
+    public ?object $reference_model = null;
+
     #[MapInputName('item_type')]
     #[MapName('item_type')]
     public ?string $item_type = null;
@@ -31,9 +43,9 @@ class TransactionItemData extends Data implements DataTransactionItemData{
     #[MapName('item_id')]
     public mixed $item_id = null;
 
-    #[MapInputName('item_name')]
-    #[MapName('item_name')]
-    public ?string $item_name = null;
+    #[MapInputName('name')]
+    #[MapName('name')]
+    public ?string $name = null;
 
     #[MapInputName('payment_detail')]
     #[MapName('payment_detail')]
@@ -42,9 +54,16 @@ class TransactionItemData extends Data implements DataTransactionItemData{
     public static function after(self $data):self{
         $new = static::new();
         
+        if (isset($data->reference_model)){
+            $reference_model = $data->reference_model;
+            $data->reference_type ??= $reference_model->getMorphClass();
+            $data->reference_id ??= $reference_model->getKey();
+        }
+
         if (is_array($data->payment_detail)){
             $payment_detail_name = config('module-transaction.payment_detail');
             if (isset($payment_detail_name)){
+                $data->payment_detail['name'] = $data->name;
                 $data->payment_detail = $new->requestDTO(
                     config('app.contracts.'.$payment_detail_name.'Data'),
                     $data->payment_detail
@@ -52,6 +71,10 @@ class TransactionItemData extends Data implements DataTransactionItemData{
             }else{
                 $data->payment_detail = null;
             }
+        }
+        if (!isset($data->name)){
+            $entity = $new->{$data->item_type.'Model'}()->findOrFail($data->item_id);
+            $data->name ??= $entity->exam->name ?? null;
         }
         return $data;
     }

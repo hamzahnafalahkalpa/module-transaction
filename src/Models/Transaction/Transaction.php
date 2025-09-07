@@ -88,12 +88,15 @@ class Transaction extends BaseModel
     }
 
     public function showUsingRelation(): array{
-        return ['reference'];
+        return ['reference','transactionItems'];
     }
 
     public function getViewResource(){return ViewTransaction::class;}
     public function getShowResource(){return ShowTransaction::class;}
     public function reference(){return $this->morphTo()->withoutGlobalScopes();}    
+    public function paymentSummaries(){return $this->hasManyModel(config('module-transaction.payment_summary'));}
+    public function paymentDetails(){return $this->hasManyModel(config('module-transaction.payment_detail'));}
+    public function transactionItems(){return $this->hasManyModel('TransactionItem');}    
     public function transactionHasConsument(){return $this->hasOneModel('TransactionHasConsument');}
     public function consument(){
         $consument_model = $this->ConsumentModel();

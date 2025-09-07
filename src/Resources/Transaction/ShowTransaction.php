@@ -15,11 +15,15 @@ class ShowTransaction extends ViewTransaction
     {
         $arr = [
             'reference' => $this->relationValidation('reference', function () {
-                return  $this->reference->toShowApi()->resolve();
+                return $this->propNil($this->reference->toShowApi()->resolve(),'transaction');
+            }),
+            'transaction_items' => $this->relationValidation('transactionItems', function () {
+                return $this->transactionItems->map(function ($item) {
+                    return $item->toViewApi();
+                });
             })
         ];
         $arr = $this->mergeArray(parent::toArray($request), $arr);
-
         return $arr;
     }
 }

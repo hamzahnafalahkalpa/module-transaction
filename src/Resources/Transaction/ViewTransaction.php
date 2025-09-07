@@ -22,7 +22,7 @@ class ViewTransaction extends ApiResource
             'consument'         => $this->prop_consument,
             'reference_type'    => $this->reference_type,
             'reference'         => $this->relationValidation('reference', function () {
-                return $this->reference->toViewApi()->resolve();
+                return $this->propNil($this->reference->toViewApi()->resolve(),'transaction');
             }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

@@ -49,7 +49,6 @@ class Transaction extends PackageManagement implements ContractsTransaction
             ];
         }
         $transaction = $this->usingEntity()->firstOrCreate($guard,$add);
-
         if (isset($transaction_dto->consument) && config('module-transaction.consument') !== null){
             $consument = $this->schemaContract('consument')->prepareStoreConsument($transaction_dto->consument);
             $this->TransactionHasConsumentModel()->updateOrCreate([

@@ -2,7 +2,6 @@
 
 namespace Hanafalah\ModuleTransaction\Schemas;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Hanafalah\ModuleTransaction\{
     Supports\BaseModuleTransaction
@@ -34,12 +33,6 @@ class Submission extends BaseModuleTransaction implements ContractsSubmission
         ];
         $guard  = ['id' => $submission_dto->id];
         $create = [$guard, $add];
-        // if (isset($submission_dto->id)){
-        //     $guard  = ['id' => $submission_dto->id];
-        //     $create = [$guard, $add];
-        // }else{
-        //     $create = [$add];
-        // }
 
         $submission = $this->usingEntity()->updateOrCreate(...$create);
         $this->fillingProps($submission,$submission_dto->props);

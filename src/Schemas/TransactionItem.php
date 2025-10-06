@@ -30,6 +30,11 @@ class TransactionItem extends PackageManagement implements ContractsTransacitonI
         ]);
         if (isset($transaction_item_dto->payment_detail) && config('module-transaction.payment_detail') !== null) {
             $payment_detail = &$transaction_item_dto->payment_detail;
+            if (!isset($payment_detail->payment_summary_id)){
+                $transaction_model = $transaction_item_dto->transaction_model ?? $transaction_item->transaction;
+                $payment_summary = $transaction_model->paymentSummary;
+                $payment_detail->payment_summary_id = $payment_summary->getKey();
+            }
             $payment_detail->transaction_item_id = $transaction_item->getKey();
             $this->schemaContract('payment_detail')
                  ->prepareStorePaymentDetail($payment_detail);

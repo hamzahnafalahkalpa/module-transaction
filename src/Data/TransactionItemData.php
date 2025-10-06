@@ -22,6 +22,10 @@ class TransactionItemData extends Data implements DataTransactionItemData{
     #[MapInputName('transaction_id')]
     #[MapName('transaction_id')]
     public mixed $transaction_id = null;
+
+    #[MapInputName('transaction_model')]
+    #[MapName('transaction_model')]
+    public ?object $transaction_model = null;
     
     #[MapInputName('reference_type')]
     #[MapName('reference_type')]
@@ -54,6 +58,12 @@ class TransactionItemData extends Data implements DataTransactionItemData{
     public static function after(self $data):self{
         $new = static::new();
         
+        if (!isset($data->name)){
+            $entity = $new->{$data->item_type.'Model'}()->findOrFail($data->item_id);
+            $data->name ??= $entity->name ?? null;
+            // $data->name ??= $entity->exam->name ?? null;
+        }
+        
         if (isset($data->reference_model)){
             $reference_model = $data->reference_model;
             $data->reference_type ??= $reference_model->getMorphClass();
@@ -71,10 +81,6 @@ class TransactionItemData extends Data implements DataTransactionItemData{
             }else{
                 $data->payment_detail = null;
             }
-        }
-        if (!isset($data->name)){
-            $entity = $new->{$data->item_type.'Model'}()->findOrFail($data->item_id);
-            $data->name ??= $entity->exam->name ?? null;
         }
         return $data;
     }

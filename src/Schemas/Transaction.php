@@ -4,6 +4,7 @@ namespace Hanafalah\ModuleTransaction\Schemas;
 
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
 use Hanafalah\ModuleTransaction\Contracts\Data\TransactionData;
+use Hanafalah\ModuleTransaction\Contracts\Data\TransactionItemData;
 use Hanafalah\ModuleTransaction\Contracts\Schemas\Transaction as ContractsTransaction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -60,23 +61,31 @@ class Transaction extends PackageManagement implements ContractsTransaction
 
         if (isset($transaction_dto->transaction_items) && count($transaction_dto->transaction_items) > 0){
             foreach ($transaction_dto->transaction_items as $transaction_item_dto) {
-                $transaction_item_dto->transaction_id = $transaction->getKey();
-                $transaction_item_dto->reference_type = $transaction->reference_type;
-                $transaction_item_dto->reference_id = $transaction->reference_id;
-                $this->schemaContract('transaction_item')->prepareStoreTransactionItem($transaction_item_dto);
+                $this->createTransactionItem($transaction_item_dto, $transaction);
             }
         }
 
+        if (isset($transaction_dto->transaction_item)){
+            $transaction_item = $this->createTransactionItem($transaction_dto->transaction_item, $transaction);
+            $transaction_dto->props['prop_transaction_item'] = $transaction_item->toViewApi()->resolve();
+        }
         if (isset($transaction_dto->payment_details) && count($transaction_dto->payment_details) > 0){
             foreach ($transaction_dto->payment_details as $payment_detail_dto) {
                 $payment_detail_dto->transaction_id = $transaction->getKey();
                 $this->schemaContract('payment_detail')->prepareStorePaymentDetail($payment_detail_dto);
             }
         }
-
         $this->fillingProps($transaction, $transaction_dto->props);
         $transaction->save();
         return $this->transaction_model = $transaction;
+    }
+
+    protected function createTransactionItem(TransactionItemData &$transaction_item_dto, Model &$transaction){
+        $transaction_item_dto->transaction_id = $transaction->getKey();
+        $transaction_item_dto->transaction_model = $transaction;
+        $transaction_item_dto->reference_type = $transaction->reference_type;
+        $transaction_item_dto->reference_id   = $transaction->reference_id;
+        return $this->schemaContract('transaction_item')->prepareStoreTransactionItem($transaction_item_dto);
     }
 
     public function camelEntity(): string{

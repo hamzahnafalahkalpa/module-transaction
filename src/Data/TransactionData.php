@@ -49,6 +49,10 @@ class TransactionData extends Data implements DataTransactionData{
     #[MapName('journal_reported_at')]
     public ?Carbon $journal_reported_at = null;
 
+    #[MapInputName('transaction_item')]
+    #[MapName('transaction_item')]
+    public ?TransactionItemData $transaction_item = null;
+
     #[MapInputName('transaction_items')]
     #[MapName('transaction_items')]
     #[DataCollectionOf(TransactionItemData::class)]

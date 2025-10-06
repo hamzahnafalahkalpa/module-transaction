@@ -4,6 +4,7 @@ namespace Hanafalah\ModuleTransaction\Models;
 
 use Hanafalah\LaravelHasProps\Concerns\HasProps;
 use Hanafalah\LaravelSupport\Models\BaseModel;
+use Hanafalah\ModuleTransaction\Concerns\HasTransaction;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Hanafalah\ModuleTransaction\Resources\Submission\{
     ViewSubmission,
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 
 class Submission extends BaseModel
 {
-    use HasUlids, HasProps, SoftDeletes;
+    use HasUlids, HasProps, SoftDeletes, HasTransaction;
     
     public $incrementing  = false;
     protected $keyType    = 'string';

@@ -2,15 +2,21 @@
 
 namespace Hanafalah\ModuleTransaction\Concerns;
 
+use Hanafalah\LaravelSupport\Concerns\Support\HasRequestData;
+
 trait HasTransaction
 {
+    use HasRequestData;
+    
     public static function bootHasTransaction()
     {
-        static::addGlobalScope('with_transaction', function ($query) {
-            $query->with('transaction');
-        });
         static::created(function ($query) {
-            $transaction = $query->transaction()->firstOrCreate();
+            $transaction = app(config('app.contracts.Transaction'))
+            ->prepareStoreTransaction($query->requestDTO(config('app.contracts.TransactionData'),[
+                'reference_model' => $query,
+                'reference_id' => $query->getKey(),
+                'reference_type' => $query->getMorphClass()
+            ]));
             $query->prop_transaction = $transaction->toViewApi()->resolve();
         });
     }

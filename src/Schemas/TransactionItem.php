@@ -13,6 +13,12 @@ class TransactionItem extends PackageManagement implements ContractsTransacitonI
     public $transaction_item_model;
 
     public function prepareStoreTransactionItem(TransactionItemData $transaction_item_dto): Model{
+        if (isset($transaction_item_dto->item)){
+            $item_dto = &$transaction_item_dto->item;
+            $item_type = $transaction_item_dto->item_type;
+            $transaction_item = $this->schemaContract($item_type)->{'prepareStore'.$item_type}($item_dto);
+            $transaction_item_dto->item_id = $transaction_item->getKey();
+        }
         if (isset($transaction_item_dto->id)) {
             $guard = ['id' => $transaction_item_dto->id];
         } else {

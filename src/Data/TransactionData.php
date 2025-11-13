@@ -71,7 +71,7 @@ class TransactionData extends Data implements DataTransactionData{
         if (!isset($attributes['reference'])){
             if (!isset($attributes['reference_type']) && !isset($attributes['reference_id'])){
                 if (isset($attributes['id'])){
-                    $transaction_model   = $new->TransactionModel()->with('reference')->findOrFail($attributes['id']);
+                    $transaction_model            = $new->TransactionModel()->with('reference')->findOrFail($attributes['id']);
                     $attributes['reference_id']   = $reference['id'] = $transaction_model->reference_id;
                     $attributes['reference_type'] = $transaction_model->reference_type;
                 }else{

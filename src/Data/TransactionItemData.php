@@ -47,6 +47,10 @@ class TransactionItemData extends Data implements DataTransactionItemData{
     #[MapName('item_id')]
     public mixed $item_id = null;
 
+    #[MapInputName('item')]
+    #[MapName('item_')]
+    public array|object|null $item = null;
+
     #[MapInputName('name')]
     #[MapName('name')]
     public ?string $name = null;
@@ -55,13 +59,24 @@ class TransactionItemData extends Data implements DataTransactionItemData{
     #[MapName('payment_detail')]
     public array|object|null $payment_detail = null;
 
+    public static function before(array &$attributes){
+        $new = self::new();
+        if (isset($attributes['item']) && isset($attributes['item_type'])){
+            $attributes['item'] = $new->requestDTO(config('app.contracts.'.$attributes['item_type'].'Data'), $attributes['item']);
+        }
+    }
+
     public static function after(self $data):self{
         $new = static::new();
         
-        if (!isset($data->name)){
+        if (!isset($data->name) && isset($data->item_id)){
             $entity = $new->{$data->item_type.'Model'}()->findOrFail($data->item_id);
             $data->name ??= $entity->name ?? null;
             // $data->name ??= $entity->exam->name ?? null;
+        }
+
+        if (isset($data->item) && isset($data->item->name)){
+            $data->name ??= $data->item->name;
         }
         
         if (isset($data->reference_model)){

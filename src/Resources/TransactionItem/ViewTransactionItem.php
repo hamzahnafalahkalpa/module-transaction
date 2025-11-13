@@ -23,7 +23,10 @@ class ViewTransactionItem extends ApiResource
             'item_id'         => $this->item_id,
             'payment_detail'  => $this->relationValidation('paymentDetail',function(){
                 return $this->paymentDetail->toViewApi()->resolve();
-            })
+            }),
+            'item'            => $this->relationValidation('item', function () {
+                return $this->item->toShowApi()->resolve();
+            },$this->prop_item)
         ];
         return $arr;
     }

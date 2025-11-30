@@ -23,7 +23,8 @@ class TransactionItem extends BaseModel
         'reference_id',
         'item_type', 
         'item_id', 
-        'name'
+        'name',
+        'props'
     ];
     protected $show       = ['parent_id'];
 

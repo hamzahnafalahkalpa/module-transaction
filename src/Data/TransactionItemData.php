@@ -59,6 +59,10 @@ class TransactionItemData extends Data implements DataTransactionItemData{
     #[MapName('payment_detail')]
     public array|object|null $payment_detail = null;
 
+    #[MapInputName('props')]
+    #[MapName('props')]
+    public ?array $props = null;
+
     public static function before(array &$attributes){
         $new = self::new();
         if (isset($attributes['item']) && isset($attributes['item_type'])){

@@ -19,8 +19,7 @@ class ViewMasterReport extends ViewUnicode
       'name' => $this->name,
       'label' => $this->label,
       'data_type' => $this->data_type,
-      'filters' => $this->filters,
-      'columns' => $this->columns,
+      'filters' => $this->filters
     ];
     return $arr;
   }

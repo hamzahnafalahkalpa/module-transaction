@@ -36,6 +36,7 @@ class Transaction extends PackageManagement implements ContractsTransaction
             $reference                 = $schema_reference->prepareStore($transaction_dto->reference);
             $transaction_dto->reference_id = $reference->getKey();
             $transaction_dto->props['prop_'.Str::snake($transaction_dto->reference_type)] = $reference->toViewApi()->resolve();
+            $transaction_dto->reference_model = $reference;
         }
 
         $add = [
@@ -50,6 +51,9 @@ class Transaction extends PackageManagement implements ContractsTransaction
             ];
         }
         $transaction = $this->usingEntity()->firstOrCreate($guard,$add);
+        if (isset($reference)){
+            $transaction->setRelation('reference', $reference);
+        }
         if (isset($transaction_dto->consument) && config('module-transaction.consument') !== null){
             $consument = $this->schemaContract('consument')->prepareStoreConsument($transaction_dto->consument);
             $this->TransactionHasConsumentModel()->updateOrCreate([
@@ -60,8 +64,10 @@ class Transaction extends PackageManagement implements ContractsTransaction
         }
 
         if (isset($transaction_dto->transaction_items) && count($transaction_dto->transaction_items) > 0){
+            $transaction->setRelation('transactionItems', collect());
             foreach ($transaction_dto->transaction_items as $transaction_item_dto) {
-                $this->createTransactionItem($transaction_item_dto, $transaction);
+                $transaction_item = $this->createTransactionItem($transaction_item_dto, $transaction);
+                $transaction->transactionItems->push($transaction_item);
             }
         }
 

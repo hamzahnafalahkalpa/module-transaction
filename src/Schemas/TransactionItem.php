@@ -45,6 +45,8 @@ class TransactionItem extends PackageManagement implements ContractsTransacitonI
             $this->schemaContract('payment_detail')
                  ->prepareStorePaymentDetail($payment_detail);
         }
+        $this->fillingProps($transaction_item,$transaction_item_dto->props);
+        $transaction_item->save();
         return $this->transaction_item_model = $transaction_item;
     }
 }

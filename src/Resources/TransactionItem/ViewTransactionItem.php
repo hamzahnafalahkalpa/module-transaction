@@ -26,7 +26,8 @@ class ViewTransactionItem extends ApiResource
             }),
             'item'            => $this->relationValidation('item', function () {
                 return $this->item->toShowApi()->resolve();
-            },$this->prop_item)
+            },$this->prop_item),
+            'dynamic_forms' => $this->dynamic_forms,
         ];
         return $arr;
     }

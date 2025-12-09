@@ -29,12 +29,16 @@ class Submission extends BaseModuleTransaction implements ContractsSubmission
 
     public function prepareStoreSubmission(SubmissionData $submission_dto): Model{
         $add = [
-            'name' => $submission_dto->name
+            'name' => $submission_dto->name,
+            'reference_type' => $submission_dto->reference_type,
+            'reference_id' => $submission_dto->reference_id,
+            'status' => $submission_dto->status
         ];
         $guard  = ['id' => $submission_dto->id];
         $create = [$guard, $add];
 
         $submission = $this->usingEntity()->updateOrCreate(...$create);
+
         $this->fillingProps($submission,$submission_dto->props);
         $submission->save();
         return $this->submission_model = $submission;

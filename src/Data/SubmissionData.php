@@ -16,7 +16,7 @@ class SubmissionData extends Data implements DataSubmissionData
     #[MapInputName('name')]
     #[MapName('name')]
     public string $name;
-
+    
     #[MapInputName('reference_type')]
     #[MapName('reference_type')]
     public ?string $reference_type = null;

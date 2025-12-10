@@ -75,10 +75,11 @@ class Transaction extends PackageManagement implements ContractsTransaction
             $transaction_item = $this->createTransactionItem($transaction_dto->transaction_item, $transaction);
             $transaction_dto->props['prop_transaction_item'] = $transaction_item->toViewApi()->resolve();
         }
+
         if (isset($transaction_dto->payment_details) && count($transaction_dto->payment_details) > 0){
             foreach ($transaction_dto->payment_details as $payment_detail_dto) {
                 $payment_detail_dto->transaction_id = $transaction->getKey();
-                $this->schemaContract('payment_detail')->prepareStorePaymentDetail($payment_detail_dto);
+                $payment_detail = $this->schemaContract('payment_detail')->prepareStorePaymentDetail($payment_detail_dto);
             }
         }
         $this->fillingProps($transaction, $transaction_dto->props);

@@ -4,6 +4,7 @@ namespace Hanafalah\ModuleTransaction\Data;
 
 use Carbon\Carbon;
 use Hanafalah\LaravelSupport\Supports\Data;
+use Hanafalah\ModulePayment\Contracts\Data\BillingData;
 use Hanafalah\ModulePayment\Contracts\Data\ConsumentData;
 use Hanafalah\ModulePayment\Contracts\Data\PaymentDetailData;
 use Hanafalah\ModuleTransaction\Contracts\Data\TransactionData as DataTransactionData;
@@ -57,6 +58,10 @@ class TransactionData extends Data implements DataTransactionData{
     #[MapName('transaction_items')]
     #[DataCollectionOf(TransactionItemData::class)]
     public ?array $transaction_items = null;
+
+    #[MapInputName('billing')]
+    #[MapName('billing')]
+    public ?BillingData $billing = null;
 
     #[MapInputName('payment_details')]
     #[MapName('payment_details')]

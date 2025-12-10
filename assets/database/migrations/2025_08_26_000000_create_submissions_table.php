@@ -11,7 +11,7 @@ return new class extends Migration
 {
     use Hanafalah\LaravelSupport\Concerns\NowYouSeeMe;
 
-    private $__table;
+    
 
     public function __construct()
     {
@@ -30,9 +30,6 @@ return new class extends Migration
             Schema::create($table_name, function (Blueprint $table) {
                 $table->ulid('id')->primary();
                 $table->string('name', 255)->nullable(false);
-                $table->string('reference_type', 50)->nullable();
-                $table->string('reference_id',26)->nullable();
-                $table->string('status', 50)->nullable();
                 $table->json('props')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
